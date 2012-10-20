@@ -19,6 +19,13 @@ namespace Halloween.Entities
 
     class Zombie : Pawn
     {
+        public const float CHARSPEED = 3f;
+        public const float GRAVITY = .2f;
+        public const float GROUNDCOOLDOWN = 0.2f;//how your velocity slows down on the ground
+        public const float AIRCOOLDOWN = 0.2f;//how your velocity slows down in the air
+        public const float JUMPSPEED = 3f;
+
+
 
         GameTime actionStart;
         public PlayerState playerState;
@@ -68,23 +75,23 @@ namespace Halloween.Entities
                     if (G.input.Keyboard[Keys.A].IsDown)
                     {
                         facesRight = false;
-                        vel.X = -1f;
+                        vel.X = -CHARSPEED;
                     }
                     else if (G.input.Keyboard[Keys.D].IsDown)
                     {
                         facesRight = true;
-                        vel.X = 1f;
+                        vel.X = CHARSPEED;
                     }
                     else
                     {
-                        vel.X *= 0.2f;
+                        vel.X *= GROUNDCOOLDOWN;
                     }
 
 
 
                     if (G.input.Keyboard[Keys.Space].IsPressed)
                     {
-                        vel.Y = -3f;
+                        vel.Y = JUMPSPEED;
                         this.playerState = PlayerState.Jump;
                         actionStart = gameTime;
                     }
@@ -144,22 +151,22 @@ namespace Halloween.Entities
 
                 case PlayerState.Jump:
                     //gravity accel
-                    vel.Y += 0.05f;
+                    vel.Y += GRAVITY;
 
                     //decide here if we want air control and how much
                     if (G.input.Keyboard[Keys.A].IsDown)
                     {
                         facesRight = false;
-                        vel.X = -1f;
+                        vel.X = CHARSPEED;
                     }
                     else if (G.input.Keyboard[Keys.D].IsDown)
                     {
                         facesRight = true;
-                        vel.X = 1f;
+                        vel.X = CHARSPEED;
                     }
                     else
                     {
-                        vel.X *= 0.5f;
+                        vel.X *= AIRCOOLDOWN;
                     }
 
 
@@ -304,7 +311,7 @@ namespace Halloween.Entities
 
                 case PlayerState.Jump:
                     //gravity accel
-                    vel.Y += 0.05f;
+                    vel.Y += GRAVITY;
                     /*
                     //decide here if we want air control and how much
                     if (G.input.Keyboard[Keys.A].IsDown)
