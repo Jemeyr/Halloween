@@ -11,21 +11,23 @@ using Microsoft.Xna.Framework.Media;
 using Halloween.Graphics;
 using Halloween.World;
 using Halloween.Audio;
+using System.IO;
+using FuncWorks.XNA.XTiled;
 
 namespace Halloween
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static Game1 Instance;
+
         public AudioManager audio;
+        public Dictionary<string, Map> maps = new Dictionary<string,Map>();
 
         public Cam2d cam;
-        Level currentLevel;
+        public Level level;
 
         Texture2D pawnText;
 
@@ -35,6 +37,7 @@ namespace Halloween
 
         public Game1()
         {
+            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -50,20 +53,18 @@ namespace Halloween
             Components.Add(audio);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             this.cam = new Cam2d(GraphicsDevice.Viewport);
 
-            TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
+            //TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
 
   //          pawnText = Content.Load<Texture2D>("");
 
-            for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
-            {
-                TileArray.addTexture(Content.Load<Texture2D>("Tiles/tile" + i));
-            }
+            //for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
+            //{
+            //    TileArray.addTexture(Content.Load<Texture2D>("Tiles/tile" + i));
+            //}
 
-            this.currentLevel = new Level();
-
+            this.level = new Levels.Level1(this, spriteBatch);
 
             //test stuff
             test = Content.Load<Texture2D>("works");
@@ -78,12 +79,12 @@ namespace Halloween
                 this.Exit();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                audio.Play("BGM_Ice");
+                audio.Play("SFX_Laser");
 
             rot += 0.05f;
             //cam.Zoom *= .995f;
 
-            currentLevel.update(gameTime);
+            level.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -91,13 +92,9 @@ namespace Halloween
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, cam.GetCameraTransformation());
 
-
-
-            currentLevel.render(gameTime, spriteBatch);
-
+            level.Draw(gameTime);
 
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
-            
             
             spriteBatch.End();
 

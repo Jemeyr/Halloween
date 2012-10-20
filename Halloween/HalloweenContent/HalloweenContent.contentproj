@@ -22,6 +22,9 @@
     <RootNamespace>HalloweenContent</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FuncWorks.XNA.XTiledExtensions">
+      <HintPath>..\..\..\..\..\Downloads\XTiled-0.8.1.1\XTiled-0.8.1.1\FuncWorks.XNA.XTiledExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.EffectImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
@@ -81,7 +84,13 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Levels\1.tmx">
+      <Name>1</Name>
+      <Importer>TMXContentImporter</Importer>
+      <Processor>TMXContentProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Audio\Audio.xap">
       <Name>Audio</Name>

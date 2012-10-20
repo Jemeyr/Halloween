@@ -9,32 +9,46 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Halloween.Entities;
+using FuncWorks.XNA.XTiled;
 
 namespace Halloween.World
 {
-    class Level
+    public class Level : DrawableGameComponent
     {
-        public TileArray tileArray;
+        //public TileArray tileArray;
 
+        public FuncWorks.XNA.XTiled.Map map;
+        public SpriteBatch spriteBatch;
         public List<Entity> entities = new List<Entity>();
 
-
-        public Level()
+        public ContentManager Content
         {
-            this.tileArray = new TileArray();
+            get { return Game.Content; }
         }
 
-        public void render(GameTime gameTime, SpriteBatch spriteBatch)
+        public Level(Game game, SpriteBatch sb)
+            : base(game)
         {
-            tileArray.render(spriteBatch);
+            spriteBatch = sb;
+            //this.tileArray = new TileArray();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            //tileArray.render(spriteBatch);
+            var cam = Game1.Instance.cam;
+            var viewport = Game1.Instance.GraphicsDevice.Viewport;
+            map.Draw(spriteBatch, new Rectangle((int)cam.Position.X, (int)cam.Position.Y, viewport.Width, viewport.Height));
             foreach (Entity entity in entities)
             {
                 entity.render(gameTime, spriteBatch);
             }
+            base.Draw(gameTime);
         }
 
-        public void update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             foreach (Entity entity in entities)
             {
                 entity.update(gameTime);
