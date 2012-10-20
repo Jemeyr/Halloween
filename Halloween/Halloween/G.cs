@@ -14,6 +14,7 @@ using Halloween.Audio;
 using System.IO;
 using FuncWorks.XNA.XTiled;
 using Halloween.Input;
+using Halloween.Entities;
 
 namespace Halloween
 {
@@ -38,6 +39,7 @@ namespace Halloween
         Texture2D test;
         float rot;
 
+        SuperZombie super;
 
         public G()
         {
@@ -82,6 +84,8 @@ namespace Halloween
             //test stuff
             test = Content.Load<Texture2D>("works");
             rot = 0f;
+
+            super = new SuperZombie(Vector2.Zero, new Animation(Content.Load<Texture2D>("Zombie1")));
         }
 
         protected override void Update(GameTime gameTime)
@@ -103,6 +107,8 @@ namespace Halloween
             if (input.Keyboard[Keys.Down].IsDown)
                 cam.MoveCamera(new Vector2(0, -1));
 
+            super.update(gameTime);
+
             rot += 0.05f;
             //cam.Zoom *= .995f;
 
@@ -119,7 +125,11 @@ namespace Halloween
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
             spriteBatch.DrawString(spriteFont, cam.Position.ToString(), Vector2.Zero, Color.White);
 
+
+            super.render(gameTime, spriteBatch);
+
             spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

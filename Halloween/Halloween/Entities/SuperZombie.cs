@@ -80,6 +80,8 @@ namespace Halloween.Entities
                     }
 
                     this.pos += vel;
+
+
                     //do collision detection here.
 
 
