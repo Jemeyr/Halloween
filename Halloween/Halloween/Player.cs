@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Halloween.Graphics;
-using Halloween.World;
 using Halloween.Audio;
 using Halloween.Input;
 using Halloween.Entities;

@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Halloween.Graphics;
-using Halloween.World;
 using Halloween.Audio;
 using System.IO;
 using FuncWorks.XNA.XTiled;
@@ -71,12 +70,11 @@ namespace Halloween
 
             animations.Add("zombie", new Animation(Content.Load<Texture2D>("zombieWalk"), 0.5f, true));
 
-            level = new Level(this, spriteBatch);
+            level = new Level(this);
             level.LoadMap(@"Levels\1");
             level.mapView = graphicsDevice.Viewport.Bounds;
 
             test = Content.Load<Texture2D>("works");
-            rot = 0f;
         }
 
         protected override void Update(GameTime gameTime)
@@ -86,32 +84,19 @@ namespace Halloween
             if (input.Keyboard[Keys.Escape].IsPressed)
                 this.Exit();
 
-            if (input.Keyboard[Keys.Space].IsPressed)
-                audio.Play("SFX_Laser");
-
-            if (input.Players[PlayerIndex.One].Gamepad[GamepadButtons.A].IsPressed)
-                audio.Play("SFX_Laser");
-
-            if (input.Players[PlayerIndex.Two].Gamepad[GamepadButtons.B].IsPressed)
-                audio.Play("SFX_Laser");
-
             level.Update(gameTime);
 
-
             rot += 0.05f;
-            //cam.Zoom *= .995f;
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.DarkSlateBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, cam.GetCameraTransformation());
 
             level.Draw(gameTime);
 
-
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
-            spriteBatch.DrawString(spriteFont, cam.Position.ToString(), Vector2.Zero, Color.White);
 
             spriteBatch.End();
 

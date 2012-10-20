@@ -138,9 +138,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="G.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="World\Level.cs" />
-    <Compile Include="World\Tile.cs" />
-    <Compile Include="World\TileArray.cs" />
+    <Compile Include="Level.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

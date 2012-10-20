@@ -5,13 +5,16 @@
  </tileset>
  <layer name="Tile Layer 1" width="128" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt1EEKwDAIBMCAJ///4dJrTkmlmJYZ8JYFYYljAAAAAPBn2b0AraJ7AVpV+nc7vu9p/1nIco7VDue/HhtZznV3mAszv4uNbHV4zwXk+QGT
+   eJzt1EEKgCAQBdABV97/wtFOyFKoGIv34G+UgYEvRgAAAADwZzV7AVKV7AVIdad/f8f3jfo/67hOzLK+UYf7fY3jOygTs6yv7beX0qR3fjX7VHjPBjHcAZw=
   </data>
  </layer>
  <objectgroup name="Collisions" width="128" height="15">
   <object type="box" x="0" y="448" width="3200" height="32"/>
-  <object type="box" x="0" y="0" width="32" height="448"/>
+  <object type="box" x="0" y="288" width="32" height="160"/>
   <object type="start" x="64" y="384" width="32" height="64"/>
-  <object type="box" x="320" y="416" width="32" height="32"/>
+  <object type="box" x="256" y="416" width="96" height="32"/>
+  <object type="box" x="448" y="384" width="64" height="64"/>
+  <object type="box" x="480" y="352" width="32" height="32"/>
+  <object type="box" x="256" y="384" width="32" height="32"/>
  </objectgroup>
 </map>

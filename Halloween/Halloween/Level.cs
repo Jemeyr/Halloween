@@ -11,12 +11,11 @@ using Microsoft.Xna.Framework.Media;
 using Halloween.Entities;
 using FuncWorks.XNA.XTiled;
 
-namespace Halloween.World
+namespace Halloween
 {
     public class Level : DrawableGameComponent
     {
         public FuncWorks.XNA.XTiled.Map map;
-        public SpriteBatch spriteBatch;
         public List<Entity> entities = new List<Entity>();
         public Rectangle mapView = new Rectangle();
         public List<Rectangle> rectangles = new List<Rectangle>();
@@ -29,23 +28,22 @@ namespace Halloween.World
             get { return Game.Content; }
         }
 
-        public Level(Game game, SpriteBatch sb)
+        public Level(Game game)
             : base(game)
         {
-            spriteBatch = sb;
         }
 
         public override void Draw(GameTime gameTime)
         {
-            map.Draw(spriteBatch, mapView);
+            map.Draw(G.spriteBatch, mapView);
             foreach (Entity entity in entities)
             {
-                entity.render(gameTime, spriteBatch);
+                entity.render(gameTime, G.spriteBatch);
             }
 
             foreach (Player player in players)
             {
-                player.render(gameTime, spriteBatch);
+                player.render(gameTime, G.spriteBatch);
             }
 
 /*            foreach (Rectangle r in this.rectangles)
