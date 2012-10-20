@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Halloween.Graphics;
 
-namespace Halloween.Entity
+namespace Halloween.Entities
 {
     public class Entity
     {

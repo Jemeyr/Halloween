@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Halloween.Graphics
 {
-    class Animation
+    public class Animation
     {
 
         public Texture2D tex;

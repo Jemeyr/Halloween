@@ -63,7 +63,7 @@ namespace Halloween
 
             TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
 
-            pawnText = Content.Load<Texture2D>("")
+  //          pawnText = Content.Load<Texture2D>("");
 
             for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
             {
