@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Halloween.Graphics;
+using Halloween.World;
 
 namespace Halloween
 {
@@ -21,6 +23,8 @@ namespace Halloween
 
         Texture2D test;
         float rot;
+
+        public Cam2d cam;
 
         public Game1()
         {
@@ -50,6 +54,8 @@ namespace Halloween
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            this.cam = new Cam2d(GraphicsDevice.Viewport);
+
             test = Content.Load<Texture2D>("works");
             rot = 0f;
             // TODO: use this.Content to load your game content here
@@ -75,7 +81,7 @@ namespace Halloween
                 this.Exit();
 
             rot += 0.05f;
-
+            cam.Zoom *= 1.01f;
             base.Update(gameTime);
         }
 
@@ -86,8 +92,8 @@ namespace Halloween
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
-            
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, cam.GetCameraTransformation());
+
 
 
 
