@@ -28,6 +28,24 @@ namespace Halloween
             
             this.horde = new List<Pawn>();
             horde.Add(currentPawn);
+
+            horde.Add(new Zombie(startingPos + new Vector2(64, 0)));
+
+        }
+
+        public void render(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (Pawn p in horde)
+            {
+                p.render(gameTime, spriteBatch);
+            }
+
+            this.currentPawn.render(gameTime, spriteBatch);
+        }
+
+        public void update(GameTime gameTime)
+        {
+
         }
 
         public void cycle(int dir)

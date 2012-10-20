@@ -21,6 +21,9 @@ namespace Halloween.World
         public Rectangle mapView = new Rectangle();
         public List<Rectangle> rectangles = new List<Rectangle>();
 
+        public List<Player> players = new List<Player>();
+        
+        
         public ContentManager Content
         {
             get { return Game.Content; }
@@ -40,10 +43,15 @@ namespace Halloween.World
                 entity.render(gameTime, spriteBatch);
             }
 
-            foreach (Rectangle r in this.rectangles)
+            foreach (Player player in players)
+            {
+                player.render(gameTime, spriteBatch);
+            }
+
+/*            foreach (Rectangle r in this.rectangles)
             {
                 spriteBatch.Draw(G.pixelTexture, r, Color.Yellow);
-            }
+            }*/
 
             base.Draw(gameTime);
         }
@@ -55,6 +63,12 @@ namespace Halloween.World
             {
                 entity.update(gameTime);
             }
+
+            foreach (Player player in players)
+            {
+                player.update(gameTime);
+            }
+
         }
 
         public void LoadMap(string mapName)
@@ -77,8 +91,9 @@ namespace Halloween.World
                     rectangles.Add(mapObject.Bounds);
                     break;
                 case "start":
-                    G.player = new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y));
-                    G.player.currentPawn.animationPlayer.PlayAnimation(G.animations["zombie"]);
+                    Player p =  new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y));
+                    p.currentPawn.animationPlayer.PlayAnimation(G.animations["zombie"]);
+                    players.Add(p);
                     break;
             }
         }

@@ -25,7 +25,6 @@ namespace Halloween
         public static ContentManager content;
         public static GraphicsDevice graphicsDevice;
         public static SpriteFont spriteFont;
-        public static Player player;
 
         public static Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
 
@@ -98,8 +97,6 @@ namespace Halloween
 
             level.Update(gameTime);
 
-            if (player != null)
-                player.currentPawn.update(gameTime);
 
             rot += 0.05f;
             //cam.Zoom *= .995f;
@@ -112,8 +109,6 @@ namespace Halloween
 
             level.Draw(gameTime);
 
-            if (player != null)
-                player.currentPawn.render(gameTime, spriteBatch);
 
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
             spriteBatch.DrawString(spriteFont, cam.Position.ToString(), Vector2.Zero, Color.White);
