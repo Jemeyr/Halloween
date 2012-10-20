@@ -34,7 +34,7 @@ namespace Halloween.Entities
         }
 
 
-        public void update(GameTime gameTime)
+        public override void update(GameTime gameTime)
         {
             if (isSuper)
             {

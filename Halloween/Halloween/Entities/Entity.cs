@@ -19,7 +19,7 @@ namespace Halloween.Entities
         public Animation animation;
         public bool right;
 
-        public void update(GameTime gameTime)
+        public virtual void update(GameTime gameTime)
         {
         }
 

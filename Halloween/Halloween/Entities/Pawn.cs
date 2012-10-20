@@ -21,5 +21,8 @@ namespace Halloween.Entities
         public Pawn() {
             collisionBox = new Rectangle(-12, -64, 24, 64);
         }
+
+        public override void update(GameTime gameTime) {
+        }
     }
 }
