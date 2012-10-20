@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="128" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="mire" tilewidth="32" tileheight="32">
-  <image source="../Tiles/tileset.png" width="64" height="64"/>
+  <image source="../Tiles/tileset.png" width="192" height="192"/>
  </tileset>
  <layer name="Tile Layer 1" width="128" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt0TEKACAMxVChvf+ZnQQRXa2YPCh0/JBsIsvqASplfzb7s9mfzf5s9mezP5v92ezPZn+2U/+4ukJVdv1jOv1t9F9bx+HXX/KBU50OLV8A0g==
+   eJzt1EEKwDAIBMCAJ///4dJrTkmlmJYZ8JYFYYljAAAAAPBn2b0AraJ7AVpV+nc7vu9p/1nIco7VDue/HhtZznV3mAszv4uNbHV4zwXk+QGT
   </data>
  </layer>
  <objectgroup name="Collisions" width="128" height="15">
-  <object type="box" x="0" y="448" width="1056" height="32"/>
+  <object type="box" x="0" y="448" width="3200" height="32"/>
   <object type="box" x="0" y="0" width="32" height="448"/>
-  <object type="start" x="64" y="384" width="32" height="32"/>
+  <object type="start" x="64" y="384" width="32" height="64"/>
+  <object type="box" x="320" y="416" width="32" height="32"/>
  </objectgroup>
 </map>
