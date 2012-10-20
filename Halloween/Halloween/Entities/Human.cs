@@ -17,10 +17,11 @@ namespace Halloween.Entities
         }
 
         public override void update(GameTime gameTime) {
-            if(isArmed){
+            if (isArmed) {
                 //TODO: attack AI
-            }else{
+            } else {
                 //TODO: run away AI
             }
+        }
     }
 }
