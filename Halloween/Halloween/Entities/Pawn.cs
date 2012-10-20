@@ -19,7 +19,7 @@ namespace Halloween.Entities
         public bool friendly;
 
         public Pawn() {
-            collisionBox = new Rectangle(-12, -64, 24, 64);
+            collisionBox = new Rectangle(0, 0, 24, 64);
         }
 
         public override void update(GameTime gameTime) {

@@ -9,7 +9,7 @@ namespace Halloween.Entities
     class Kid : Pawn
     {
         public Kid() {
-            collisionBox = new Rectangle(-12, -32, 24, 32);
+            collisionBox = new Rectangle(0, 0, 24, 32);
             health = 1;
             friendly = false;
         }
