@@ -34,24 +34,34 @@ namespace Halloween.World
             {
                 for (int j = 0; j < ySize; j++)
                 {
-                    this.tiles[i, j] = new Tile(true, new Vector2(xSize * texSize, ySize * texSize));
+                    this.tiles[i, j] = new Tile(true, new Vector2(i * texSize, j * texSize));
                 }
             }
         }
 
         public void render(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < this.tiles.GetLength(0); i++)
+            int xLength = this.tiles.GetLength(0);
+            int yLength = this.tiles.GetLength(1);
+
+
+            for (int i = 0; i < xLength; i++)
             {
-                for (int j = 0; j < this.tiles.GetLength(1); i++)
+                for (int j = 0; j < yLength; j++)
                 {
-                    spriteBatch.Draw(textures[this.tiles[i, j].texID], this.tiles[i, j].position, Color.White);
+                    spriteBatch.Draw(textures[this.tiles[i, j].texID], this.tiles[i, j].position, (j+i)%2 == 0? Color.White: Color.YellowGreen);
                 }
             }
         }
 
         public static int addTexture(Texture2D tex)
         {
+            if (TileArray.textures == null)
+            {
+                textures = new Texture2D[64];
+                valid = 0;
+            }
+
             TileArray.textures[valid++] = tex;
             return valid;
         }

@@ -20,5 +20,10 @@ namespace Halloween.World
         {
             this.tileArray = new TileArray();
         }
+
+        public void render(SpriteBatch spriteBatch)
+        {
+            tileArray.render(spriteBatch);
+        }
     }
 }

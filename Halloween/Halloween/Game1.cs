@@ -21,10 +21,14 @@ namespace Halloween
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
+        public Cam2d cam;
+        private Level currentLevel;
+
+
         Texture2D test;
         float rot;
 
-        public Cam2d cam;
 
         public Game1()
         {
@@ -56,6 +60,12 @@ namespace Halloween
 
             this.cam = new Cam2d(GraphicsDevice.Viewport);
 
+            TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile")); // do this first?
+
+            this.currentLevel = new Level();
+
+
+            //test stuff
             test = Content.Load<Texture2D>("works");
             rot = 0f;
             // TODO: use this.Content to load your game content here
@@ -81,7 +91,7 @@ namespace Halloween
                 this.Exit();
 
             rot += 0.05f;
-            cam.Zoom *= 1.01f;
+            //cam.Zoom *= .995f;
             base.Update(gameTime);
         }
 
@@ -91,10 +101,12 @@ namespace Halloween
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, cam.GetCameraTransformation());
 
 
+
+            currentLevel.render(spriteBatch);
 
 
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
