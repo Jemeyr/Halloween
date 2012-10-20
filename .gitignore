@@ -45,7 +45,6 @@ local.properties
 *.chachefile
 *.Debug.cachefile
 *.ccgame
-!*.dll
 
 # XNA Audio Banks
 *.xsb
