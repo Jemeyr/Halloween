@@ -54,5 +54,10 @@ namespace Halloween.World
                 entity.update(gameTime);
             }
         }
+
+        public void LoadMap(string mapName)
+        {
+            map = Content.Load<Map>(@"Levels\1");
+        }
     }
 }

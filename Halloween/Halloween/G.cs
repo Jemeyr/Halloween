@@ -63,6 +63,9 @@ namespace Halloween
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cam = new Cam2d(GraphicsDevice.Viewport);
 
+            level = new Level(this, spriteBatch);
+            level.LoadMap(@"Levels\1");
+
             //TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
 
   //          pawnText = Content.Load<Texture2D>("");
@@ -71,8 +74,6 @@ namespace Halloween
             //{
             //    TileArray.addTexture(Content.Load<Texture2D>("Tiles/tile" + i));
             //}
-
-            level = new Levels.Level1(this, spriteBatch);
 
             //test stuff
             test = Content.Load<Texture2D>("works");
