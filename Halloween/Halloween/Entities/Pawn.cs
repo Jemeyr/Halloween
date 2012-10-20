@@ -11,7 +11,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Halloween.Entities
 {
-    class Pawn
+    class Pawn : Entity
     {
+        public Pawn() {
+            collisionBox = new Rectangle(-12, -64, 24, 64);
+        }
     }
 }

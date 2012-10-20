@@ -115,6 +115,7 @@
     <Compile Include="Audio\Sound.cs" />
     <Compile Include="Entities\Pawn.cs" />
     <Compile Include="Entities\SuperZombie.cs" />
+    <Compile Include="Entities\Zombie.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Cam2d.cs" />
     <Compile Include="Input\ButtonState.cs" />
