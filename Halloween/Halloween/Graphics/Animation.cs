@@ -13,21 +13,32 @@ namespace Halloween.Graphics
 {
     public class Animation
     {
-
-
         public Texture2D tex;
+        public float frameTime;
+        public bool isLooping;
+        public int frameWidth = 32;
+        public int frameHeight = 64;
 
-        public Animation(Texture2D tex)
+        public int FrameCount
+        {
+            get { return tex.Width / frameWidth; }
+        }
+
+        public Animation(Texture2D tex, float frameTime, bool isLooping)
         {
             this.tex = tex;
+            this.frameTime = frameTime;
+            this.isLooping = isLooping;
+        }
 
+        public Animation(Texture2D tex)
+            : this(tex, 0f, false)
+        {
         }
 
         public void render(GameTime gameTime, SpriteBatch spriteBatch, Vector2 position)
         {
             spriteBatch.Draw(tex, position, Color.White);
-
         }
-
     }
 }
