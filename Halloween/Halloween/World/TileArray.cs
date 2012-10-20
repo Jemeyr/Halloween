@@ -17,7 +17,7 @@ namespace Halloween.World
         public static int valid;
         private static Texture2D[] textures;
         private const int texSize = 32;
-
+        
         public TileArray() : this(64,64)
         {}
 
@@ -34,7 +34,7 @@ namespace Halloween.World
             {
                 for (int j = 0; j < ySize; j++)
                 {
-                    this.tiles[i, j] = new Tile(true, new Vector2(i * texSize, j * texSize));
+                    this.tiles[i, j] = new Tile(j == 10? 1 :2, true, new Vector2(i * texSize, j * texSize));
                 }
             }
         }

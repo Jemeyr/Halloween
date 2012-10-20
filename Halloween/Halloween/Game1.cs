@@ -60,7 +60,12 @@ namespace Halloween
 
             this.cam = new Cam2d(GraphicsDevice.Viewport);
 
-            TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile")); // do this first?
+            TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
+
+            for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
+            {
+                TileArray.addTexture(Content.Load<Texture2D>("Tiles/tile" + i));
+            }
 
             this.currentLevel = new Level();
 
