@@ -21,6 +21,7 @@ namespace Halloween.World
         public SpriteBatch spriteBatch;
         public List<Entity> entities = new List<Entity>();
         public Rectangle mapView = new Rectangle();
+        public List<Rectangle> rectangles = new List<Rectangle>();
 
         public ContentManager Content
         {
@@ -67,6 +68,18 @@ namespace Halloween.World
         public void LoadMap(string mapName)
         {
             map = Content.Load<Map>(@"Levels\1");
+            foreach (ObjectLayer objectLayer in map.ObjectLayers)
+            {
+                foreach (MapObject mapObject in objectLayer.MapObjects)
+                {
+                    switch (mapObject.Type.ToLower())
+                    {
+                        case "box":
+                            rectangles.Add(mapObject.Bounds);
+                            break;
+                    }
+                }
+            }
         }
     }
 }

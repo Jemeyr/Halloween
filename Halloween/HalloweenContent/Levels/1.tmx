@@ -5,7 +5,11 @@
  </tileset>
  <layer name="Tile Layer 1" width="128" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt2TEKwEAIBVHBvf+ZUwVCyJbZV3wHBLuBsXRV1cIzOHR/7U9H99f+dHR/7U9H99f+dHR/7U9H99f+dHR/7U9H99f+dHR/7U9H99f+dHb9G/uHM3z178cI/3COu//71r3Z//IPBv37m/tbLjNtAYY=
+   eJzt0TEKACAMxVChvf+ZnQQRXa2YPCh0/JBsIsvqASplfzb7s9mfzf5s9mezP5v92ezPZn+2U/+4ukJVdv1jOv1t9F9bx+HXX/KBU50OLV8A0g==
   </data>
  </layer>
+ <objectgroup name="Collisions" width="128" height="15">
+  <object type="box" x="0" y="448" width="1056" height="32"/>
+  <object type="box" x="0" y="0" width="32" height="448"/>
+ </objectgroup>
 </map>
