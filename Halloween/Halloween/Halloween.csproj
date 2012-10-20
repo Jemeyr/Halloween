@@ -107,10 +107,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio\AudioManager.cs" />
+    <Compile Include="Audio\Sound.cs" />
     <Compile Include="Entities\Pawn.cs" />
     <Compile Include="Entities\SuperZombie.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Cam2d.cs" />
+    <Compile Include="IRecyclable.cs" />
+    <Compile Include="Pool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
