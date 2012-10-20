@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Halloween.Graphics;
 using Halloween.World;
+using Halloween.Audio;
 
 namespace Halloween
 {
@@ -21,9 +22,10 @@ namespace Halloween
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public AudioManager audio;
 
         public Cam2d cam;
-        private Level currentLevel;
+        Level currentLevel;
 
         Texture2D pawnText;
 
@@ -37,26 +39,16 @@ namespace Halloween
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            audio = new AudioManager(this, @"Content\Audio\audio_settings.xgs", @"Content\Audio\Sound Bank.xsb", @"Content\Audio\Wave Bank.xwb", @"Content\Audio\Streaming Bank.xwb");
+            Components.Add(audio);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             this.cam = new Cam2d(GraphicsDevice.Viewport);
@@ -76,40 +68,24 @@ namespace Halloween
             //test stuff
             test = Content.Load<Texture2D>("works");
             rot = 0f;
-            // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                audio.Play("BGM_Ice");
 
             rot += 0.05f;
             //cam.Zoom *= .995f;
 
             currentLevel.update(gameTime);
-
-            base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);

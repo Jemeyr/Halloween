@@ -13,9 +13,6 @@ namespace Halloween.Audio
         }
 
         float _volume;
-        /// <summary>
-        /// Gets or sets the volume of the <see cref="Sound"/>.
-        /// </summary>
         public float Volume
         {
             get { return _volume; }

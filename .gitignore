@@ -47,6 +47,10 @@ local.properties
 *.ccgame
 !*.dll
 
+# XNA Audio Banks
+*.xsb
+*.xwb
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
