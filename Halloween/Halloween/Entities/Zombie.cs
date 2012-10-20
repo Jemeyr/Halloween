@@ -95,8 +95,9 @@ namespace Halloween.Entities
                         actionStart = gameTime;
                     }
 
-                    this.pos += vel;
-
+                    //this.pos += vel;
+                    this.pos.X += (int)vel.X;
+                    this.pos.Y += (int)vel.Y;
 
 
                     foreach (Rectangle r in G.level.rectangles)
@@ -166,7 +167,6 @@ namespace Halloween.Entities
                     this.pos += vel;
 
                     //do collision detection here
-
                     foreach (Rectangle r in G.level.rectangles)
                     {
                         intersect = Rectangle.Intersect(trans, r);
