@@ -32,6 +32,7 @@ namespace Halloween.Entities
             this.facesRight = true;
             this.playerState = PlayerState.Jump;
             this.isSuper = false;
+            animationPlayer.PlayAnimation(G.animations["zombie"]);
         }
 
 

@@ -91,9 +91,7 @@ namespace Halloween.World
                     rectangles.Add(mapObject.Bounds);
                     break;
                 case "start":
-                    Player p =  new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y));
-                    p.currentPawn.animationPlayer.PlayAnimation(G.animations["zombie"]);
-                    players.Add(p);
+                    players.Add(new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y)));
                     break;
             }
         }
