@@ -16,13 +16,8 @@ namespace Halloween.Entities
     enum PlayerState { Run, Jump, Lunge, Sit, LungeStunned }
     //you can run with speed zero and that's still running. 
 
-    class SuperZombie
+    class SuperZombie : Pawn
     {
-        //inherited
-        public Vector2 pos;
-        public Animation animation;
-        public Vector2 vel;
-
 
         GameTime actionStart;
         public PlayerState playerState;

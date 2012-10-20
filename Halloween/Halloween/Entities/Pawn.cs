@@ -8,11 +8,16 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Halloween.Graphics;
 
 namespace Halloween.Entities
 {
     class Pawn : Entity
     {
+        public Vector2 pos;
+        public Animation animation;
+        public Vector2 vel;
+
         public Pawn() {
             collisionBox = new Rectangle(-12, -64, 24, 64);
         }

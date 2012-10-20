@@ -113,6 +113,8 @@
   <ItemGroup>
     <Compile Include="Audio\AudioManager.cs" />
     <Compile Include="Audio\Sound.cs" />
+    <Compile Include="Entities\Human.cs" />
+    <Compile Include="Entities\Kid.cs" />
     <Compile Include="Entities\Pawn.cs" />
     <Compile Include="Entities\SuperZombie.cs" />
     <Compile Include="Entities\Zombie.cs" />
