@@ -77,7 +77,7 @@ namespace Halloween
             level.LoadMap(@"Levels\1");
             level.mapView = graphicsDevice.Viewport.Bounds;
 
-            animations.Add("zombie", new Animation(Content.Load<Texture2D>("Zombie1")));
+            animations.Add("zombie", new Animation(Content.Load<Texture2D>("zombieWalk"), 0.5f, true));
 
 
 
