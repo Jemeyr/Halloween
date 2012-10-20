@@ -25,6 +25,7 @@ namespace Halloween
         public Cam2d cam;
         private Level currentLevel;
 
+        Texture2D pawnText;
 
         Texture2D test;
         float rot;
@@ -61,6 +62,8 @@ namespace Halloween
             this.cam = new Cam2d(GraphicsDevice.Viewport);
 
             TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
+
+            pawnText = Content.Load<Texture2D>("")
 
             for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
             {

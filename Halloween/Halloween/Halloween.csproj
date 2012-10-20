@@ -107,11 +107,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Pawn.cs" />
+    <Compile Include="Entity\SuperZombie.cs" />
+    <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Cam2d.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="World\Entity.cs" />
+    <Compile Include="Entity\Entity.cs" />
     <Compile Include="World\Level.cs" />
     <Compile Include="World\Tile.cs" />
     <Compile Include="World\TileArray.cs" />
