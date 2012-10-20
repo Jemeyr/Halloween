@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halloween", "Halloween\Halloween\Halloween.csproj", "{517B962E-0523-4487-93A5-64AF22DABC05}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "HalloweenContent", "Halloween\HalloweenContent\HalloweenContent.contentproj", "{4CC6D3C9-C74D-4AAF-A77B-C2C005E26B48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{517B962E-0523-4487-93A5-64AF22DABC05}.Debug|x86.ActiveCfg = Debug|x86
+		{517B962E-0523-4487-93A5-64AF22DABC05}.Debug|x86.Build.0 = Debug|x86
+		{517B962E-0523-4487-93A5-64AF22DABC05}.Release|x86.ActiveCfg = Release|x86
+		{517B962E-0523-4487-93A5-64AF22DABC05}.Release|x86.Build.0 = Release|x86
+		{4CC6D3C9-C74D-4AAF-A77B-C2C005E26B48}.Debug|x86.ActiveCfg = Debug|x86
+		{4CC6D3C9-C74D-4AAF-A77B-C2C005E26B48}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
