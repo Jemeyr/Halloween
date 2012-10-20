@@ -23,6 +23,7 @@ namespace Halloween
         public static SpriteBatch spriteBatch;
         public static ContentManager content;
         public static GraphicsDevice graphicsDevice;
+        public static SpriteFont spriteFont;
 
         internal static readonly TimeSpan CachedSecond = new TimeSpan(0, 0, 0, 1);
 
@@ -53,6 +54,7 @@ namespace Halloween
         protected override void LoadContent()
         {
             graphicsDevice = GraphicsDevice;
+            spriteFont = Content.Load<SpriteFont>("Font");
 
             audio = new AudioManager(this, @"Content\Audio\audio_settings.xgs", @"Content\Audio\Sound Bank.xsb", @"Content\Audio\Wave Bank.xwb", @"Content\Audio\Streaming Bank.xwb");
             Components.Add(audio);
@@ -65,9 +67,11 @@ namespace Halloween
 
             level = new Level(this, spriteBatch);
             level.LoadMap(@"Levels\1");
+            level.mapView = graphicsDevice.Viewport.Bounds;
+
 
             //TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
-
+            
   //          pawnText = Content.Load<Texture2D>("");
 
             //for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
@@ -96,6 +100,9 @@ namespace Halloween
             if (input.Players[PlayerIndex.Two].Gamepad[GamepadButtons.B].IsPressed)
                 audio.Play("SFX_Laser");
 
+            if (input.Keyboard[Keys.Down].IsDown)
+                cam.MoveCamera(new Vector2(0, -1));
+
             rot += 0.05f;
             //cam.Zoom *= .995f;
 
@@ -110,7 +117,8 @@ namespace Halloween
             level.Draw(gameTime);
 
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
-            
+            spriteBatch.DrawString(spriteFont, cam.Position.ToString(), Vector2.Zero, Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);

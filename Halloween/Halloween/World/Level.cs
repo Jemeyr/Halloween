@@ -20,6 +20,7 @@ namespace Halloween.World
         public FuncWorks.XNA.XTiled.Map map;
         public SpriteBatch spriteBatch;
         public List<Entity> entities = new List<Entity>();
+        public Rectangle mapView = new Rectangle();
 
         public ContentManager Content
         {
@@ -36,9 +37,17 @@ namespace Halloween.World
         public override void Draw(GameTime gameTime)
         {
             //tileArray.render(spriteBatch);
-            var cam = G.cam;
-            var viewport = G.graphicsDevice.Viewport;
-            map.Draw(spriteBatch, new Rectangle((int)cam.Position.X, (int)cam.Position.Y, viewport.Width, viewport.Height));
+            Rectangle delta = mapView;
+            if (G.input.Keyboard[Keys.Down].IsPressed)
+                delta.Y += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
+            if (G.input.Keyboard[Keys.Up].IsPressed)
+                delta.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
+            if (G.input.Keyboard[Keys.Right].IsPressed)
+                delta.X += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
+            if (G.input.Keyboard[Keys.Left].IsPressed)
+                delta.X -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
+
+            map.Draw(spriteBatch, mapView);
             foreach (Entity entity in entities)
             {
                 entity.render(gameTime, spriteBatch);

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="128" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="mire" tilewidth="32" tileheight="32">
-  <image source="../Tiles/mire.png" width="96" height="570"/>
+  <image source="../Tiles/tileset.png" width="64" height="64"/>
  </tileset>
- <layer name="Tile Layer 1" width="100" height="100">
+ <layer name="Tile Layer 1" width="128" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt0zEKADAIBEHT+P8nB1IFm5RHYAbEVlisAgAAgLcem6zZY6UO4ehryJv/oUuWHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPxoA119AFA=
+   eJzt2TEKwEAIBVHBvf+ZUwVCyJbZV3wHBLuBsXRV1cIzOHR/7U9H99f+dHR/7U9H99f+dHR/7U9H99f+dHR/7U9H99f+dHR/7U9H99f+dHb9G/uHM3z178cI/3COu//71r3Z//IPBv37m/tbLjNtAYY=
   </data>
  </layer>
 </map>
