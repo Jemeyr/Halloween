@@ -23,11 +23,13 @@ namespace Halloween.Entities
         GameTime actionStart;
         public PlayerState playerState;
         public bool isSuper;
+        public bool facesRight;
 
         public SuperZombie(Vector2 pos)
         {
             this.pos = pos;
 
+            this.facesRight = true;
             this.playerState = PlayerState.Jump;
             this.isSuper = true;
         }
@@ -47,6 +49,7 @@ namespace Halloween.Entities
 
         public override void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            this.spriteEffects = facesRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             base.render(gameTime, spriteBatch);
         }
 
@@ -63,16 +66,19 @@ namespace Halloween.Entities
                 case PlayerState.Run:
                     if (G.input.Keyboard[Keys.A].IsDown)
                     {
+                        facesRight = false;
                         vel.X = -1f;
                     }
                     else if (G.input.Keyboard[Keys.D].IsDown)
                     {
+                        facesRight = true;
                         vel.X = 1f;
                     }
                     else
                     {
                         vel.X *= 0.2f;
                     }
+
 
 
                     if (G.input.Keyboard[Keys.Space].IsPressed)
@@ -141,10 +147,12 @@ namespace Halloween.Entities
                     //decide here if we want air control and how much
                     if (G.input.Keyboard[Keys.A].IsDown)
                     {
+                        facesRight = false;
                         vel.X = -1f;
                     }
                     else if (G.input.Keyboard[Keys.D].IsDown)
                     {
+                        facesRight = true;
                         vel.X = 1f;
                     }
                     else
