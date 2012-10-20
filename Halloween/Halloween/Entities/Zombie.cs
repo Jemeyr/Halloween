@@ -6,7 +6,11 @@ using Microsoft.Xna.Framework;
 
 namespace Halloween.Entities
 {
-    class Zombie
+    class Zombie : Pawn
     {
+        public Zombie() {
+            health = 5;
+            friendly = true;
+        }
     }
 }

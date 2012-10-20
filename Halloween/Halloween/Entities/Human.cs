@@ -7,5 +7,12 @@ namespace Halloween.Entities
 {
     class Human : Pawn
     {
+        public bool armed;
+        
+        public Human() {
+            health = 2;
+            friendly = false;
+        }
+
     }
 }

@@ -14,9 +14,9 @@ namespace Halloween.Entities
 {
     class Pawn : Entity
     {
-        public Vector2 pos;
-        public Animation animation;
         public Vector2 vel;
+        public int health;
+        public bool friendly;
 
         public Pawn() {
             collisionBox = new Rectangle(-12, -64, 24, 64);
