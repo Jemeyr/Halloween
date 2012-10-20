@@ -15,15 +15,29 @@ namespace Halloween.World
     {
         public TileArray tileArray;
 
+        public List<Entity> entities = new List<Entity>();
+
 
         public Level()
         {
             this.tileArray = new TileArray();
         }
 
-        public void render(SpriteBatch spriteBatch)
+        public void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             tileArray.render(spriteBatch);
+            foreach (Entity entity in entities)
+            {
+                entity.render(gameTime, spriteBatch);
+            }
+        }
+
+        public void update(GameTime gameTime)
+        {
+            foreach (Entity entity in entities)
+            {
+                entity.update(gameTime);
+            }
         }
     }
 }

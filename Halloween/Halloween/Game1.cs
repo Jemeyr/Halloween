@@ -97,6 +97,9 @@ namespace Halloween
 
             rot += 0.05f;
             //cam.Zoom *= .995f;
+
+            currentLevel.update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -111,7 +114,7 @@ namespace Halloween
 
 
 
-            currentLevel.render(spriteBatch);
+            currentLevel.render(gameTime, spriteBatch);
 
 
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
