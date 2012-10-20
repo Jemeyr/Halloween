@@ -65,6 +65,11 @@ namespace Halloween.Entities
                     {
                         vel.X = 1f;
                     }
+                    else
+                    {
+                        vel.X *= 0.2f;
+                    }
+
 
                     if (G.input.Keyboard[Keys.Space].IsPressed)
                     {
@@ -100,6 +105,10 @@ namespace Halloween.Entities
                     {
                         vel.X = 1f;
                     }
+                    else
+                    {
+                        vel.X *= 0.5f;
+                    }
 
 
                     //update position
@@ -109,8 +118,9 @@ namespace Halloween.Entities
 
 
                     //temp
-                    if (this.pos.Y < 32 * 70)
+                    if (this.pos.Y > 200)
                     {
+                        vel.Y = 0f;
                         this.playerState = PlayerState.Run;
                     }
 
