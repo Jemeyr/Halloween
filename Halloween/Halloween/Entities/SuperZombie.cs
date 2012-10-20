@@ -9,7 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Halloween.Graphics;
-
+using Halloween.World;
+using Halloween.Entities;
 
 namespace Halloween.Entities
 {
@@ -26,7 +27,8 @@ namespace Halloween.Entities
         public SuperZombie(Vector2 pos)
         {
             this.pos = pos;
-            this.playerState = PlayerState.Run;
+
+            this.playerState = PlayerState.Jump;
             this.isSuper = true;
         }
 
@@ -50,6 +52,12 @@ namespace Halloween.Entities
 
         public void playerUpdate(GameTime gameTime)
         {
+            Rectangle intersect;
+            Rectangle trans = this.collisionBox;
+
+            trans.X += (int)this.pos.X;
+            trans.Y += (int)this.pos.Y;
+
             switch (playerState)
             {
                 case PlayerState.Run:
@@ -83,8 +91,46 @@ namespace Halloween.Entities
                     this.pos += vel;
 
 
-                    //do collision detection here.
+                    
+                    foreach (Rectangle r in G.level.rectangles)
+                    {
+                        intersect = Rectangle.Intersect(trans, r);
+                        if (!intersect.IsEmpty)
+                        {
+                            //find minor axis
+                            int y = intersect.Height;
+                            int x = intersect.Width;
 
+                            if (x < y)
+                            {
+                                //resolve in x axis
+                                if (r.X < trans.X)
+                                {
+                                    this.pos.X += x;
+                                }
+                                else
+                                {
+                                    this.pos.X -= x;
+                                }
+                            }
+                            else
+                            {
+                                //resolve in y axis
+                                if (r.Y < trans.Y)
+                                {
+                                    this.pos.Y += y;
+                                }
+                                else
+                                {
+                                    this.pos.Y -= y;
+                                }
+                            }
+                            break;
+                        }
+                    }
+
+                    //do collision detection here.
+                    
 
                     break;
 
@@ -112,14 +158,44 @@ namespace Halloween.Entities
 
                     //do collision detection here
 
-
-                    //temp
-                    if (this.pos.Y > 200)
+                    foreach (Rectangle r in G.level.rectangles)
                     {
-                        vel.Y = 0f;
-                        this.playerState = PlayerState.Run;
-                    }
+                        intersect = Rectangle.Intersect(trans, r);
+                        if (!intersect.IsEmpty)
+                        {
+                            //find minor axis
+                            int y = intersect.Height;
+                            int x = intersect.Width;
 
+                            if (x < y)
+                            {
+                                //resolve in x axis
+                                if (r.X < trans.X)
+                                {
+                                    this.pos.X += x;
+                                }
+                                else
+                                {
+                                    this.pos.X -= x;
+                                }
+                            }
+                            else
+                            {
+                                //resolve in y axis
+                                if (r.Y < trans.Y)
+                                {
+                                    this.pos.Y += y;
+                                }
+                                else
+                                {
+                                    this.pos.Y -= y;
+                                }
+                                this.playerState = PlayerState.Run;
+                                this.vel.Y = 0f;
+                            }
+                            break;
+                        }
+                    }
 
                     break;
 

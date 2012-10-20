@@ -39,6 +39,12 @@ namespace Halloween.World
             {
                 entity.render(gameTime, spriteBatch);
             }
+
+            foreach (Rectangle r in this.rectangles)
+            {
+                spriteBatch.Draw(G.pixelTexture, r, Color.Yellow);
+            }
+
             base.Draw(gameTime);
         }
 

@@ -25,7 +25,10 @@ namespace Halloween
         public static ContentManager content;
         public static GraphicsDevice graphicsDevice;
         public static SpriteFont spriteFont;
+
         public static Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
+
+        public static Texture2D pixelTexture;
 
         internal static readonly TimeSpan CachedSecond = new TimeSpan(0, 0, 0, 1);
 
@@ -58,6 +61,8 @@ namespace Halloween
         {
             graphicsDevice = GraphicsDevice;
             spriteFont = Content.Load<SpriteFont>("Font");
+            pixelTexture = new Texture2D(graphicsDevice, 1, 1);
+            pixelTexture.SetData<Color>(new[] { Color.White });
 
             audio = new AudioManager(this, @"Content\Audio\audio_settings.xgs", @"Content\Audio\Sound Bank.xsb", @"Content\Audio\Wave Bank.xwb", @"Content\Audio\Streaming Bank.xwb");
             Components.Add(audio);
@@ -74,21 +79,14 @@ namespace Halloween
 
             animations.Add("zombie", new Animation(Content.Load<Texture2D>("Zombie1")));
 
-            //TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
-            
-  //          pawnText = Content.Load<Texture2D>("");
 
-            //for (int i = 1; i < 3; i++) // HACK update this as we add tiles.
-            //{
-            //    TileArray.addTexture(Content.Load<Texture2D>("Tiles/tile" + i));
-            //}
 
-            //test stuff
             test = Content.Load<Texture2D>("works");
             rot = 0f;
 
-            super = new SuperZombie(Vector2.Zero);
+            super = new SuperZombie(new Vector2(64));
             super.animationPlayer.PlayAnimation(animations["zombie"]);
+
         }
 
         protected override void Update(GameTime gameTime)
