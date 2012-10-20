@@ -36,8 +36,8 @@ namespace Halloween.World
         public override void Draw(GameTime gameTime)
         {
             //tileArray.render(spriteBatch);
-            var cam = Game1.Instance.cam;
-            var viewport = Game1.Instance.GraphicsDevice.Viewport;
+            var cam = G.cam;
+            var viewport = G.graphicsDevice.Viewport;
             map.Draw(spriteBatch, new Rectangle((int)cam.Position.X, (int)cam.Position.Y, viewport.Width, viewport.Height));
             foreach (Entity entity in entities)
             {

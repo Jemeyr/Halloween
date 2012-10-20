@@ -13,21 +13,24 @@ using Halloween.World;
 using Halloween.Audio;
 using System.IO;
 using FuncWorks.XNA.XTiled;
+using Halloween.Input;
 
 namespace Halloween
 {
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class G : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static GraphicsDeviceManager graphics;
+        public static SpriteBatch spriteBatch;
+        public static ContentManager content;
+        public static GraphicsDevice graphicsDevice;
 
-        public static Game1 Instance;
+        internal static readonly TimeSpan CachedSecond = new TimeSpan(0, 0, 0, 1);
 
-        public AudioManager audio;
-        public Dictionary<string, Map> maps = new Dictionary<string,Map>();
+        public static AudioManager audio;
+        public static InputManager input;
 
-        public Cam2d cam;
-        public Level level;
+        public static Cam2d cam;
+        public static Level level;
 
         Texture2D pawnText;
 
@@ -35,11 +38,11 @@ namespace Halloween
         float rot;
 
 
-        public Game1()
+        public G()
         {
-            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            content = Content;
         }
 
         protected override void Initialize()
@@ -49,11 +52,16 @@ namespace Halloween
 
         protected override void LoadContent()
         {
+            graphicsDevice = GraphicsDevice;
+
             audio = new AudioManager(this, @"Content\Audio\audio_settings.xgs", @"Content\Audio\Sound Bank.xsb", @"Content\Audio\Wave Bank.xwb", @"Content\Audio\Streaming Bank.xwb");
             Components.Add(audio);
 
+            input = new InputManager();
+            Components.Add(input);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            this.cam = new Cam2d(GraphicsDevice.Viewport);
+            cam = new Cam2d(GraphicsDevice.Viewport);
 
             //TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
 
@@ -64,7 +72,7 @@ namespace Halloween
             //    TileArray.addTexture(Content.Load<Texture2D>("Tiles/tile" + i));
             //}
 
-            this.level = new Levels.Level1(this, spriteBatch);
+            level = new Levels.Level1(this, spriteBatch);
 
             //test stuff
             test = Content.Load<Texture2D>("works");
@@ -75,10 +83,16 @@ namespace Halloween
         {
             base.Update(gameTime);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (input.Keyboard[Keys.Escape].IsPressed)
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (input.Keyboard[Keys.Space].IsPressed)
+                audio.Play("SFX_Laser");
+
+            if (input.Players[PlayerIndex.One].Gamepad[GamepadButtons.A].IsPressed)
+                audio.Play("SFX_Laser");
+
+            if (input.Players[PlayerIndex.Two].Gamepad[GamepadButtons.B].IsPressed)
                 audio.Play("SFX_Laser");
 
             rot += 0.05f;
