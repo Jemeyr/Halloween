@@ -94,11 +94,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZombieAnimTest.gif">
-      <Name>ZombieAnimTest</Name>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="ZombieWalk.png">
       <Name>ZombieWalk</Name>
       <Importer>TextureImporter</Importer>
