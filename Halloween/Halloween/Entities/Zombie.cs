@@ -19,7 +19,7 @@ namespace Halloween.Entities
     class Zombie : Pawn
     {
         public const float CHARSPEED = 3f;
-        public const float GRAVITY = .2f;
+        public const float GRAVITY = .12f;
         public const float GROUNDCOOLDOWN = 0.2f;//how your velocity slows down on the ground
         public const float AIRCOOLDOWN = 0.2f;//how your velocity slows down in the air
         public const float JUMPSPEED = 3f;
@@ -90,7 +90,7 @@ namespace Halloween.Entities
 
                     if (G.input.Keyboard[Keys.Space].IsPressed)
                     {
-                        vel.Y = JUMPSPEED;
+                        vel.Y = -JUMPSPEED;
                         this.playerState = PlayerState.Jump;
                         actionStart = gameTime;
                     }
@@ -156,7 +156,7 @@ namespace Halloween.Entities
                     if (G.input.Keyboard[Keys.A].IsDown)
                     {
                         facesRight = false;
-                        vel.X = CHARSPEED;
+                        vel.X = -CHARSPEED;
                     }
                     else if (G.input.Keyboard[Keys.D].IsDown)
                     {
