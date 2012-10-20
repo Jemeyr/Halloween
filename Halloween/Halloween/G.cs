@@ -43,7 +43,7 @@ namespace Halloween
         Texture2D test;
         float rot;
 
-        SuperZombie super;
+        Zombie super;
 
         public G()
         {
@@ -84,7 +84,7 @@ namespace Halloween
             test = Content.Load<Texture2D>("works");
             rot = 0f;
 
-            super = new SuperZombie(new Vector2(64));
+            super = new Zombie(new Vector2(64));
             super.animationPlayer.PlayAnimation(animations["zombie"]);
 
         }
