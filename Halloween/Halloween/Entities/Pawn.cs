@@ -17,7 +17,9 @@ namespace Halloween.Entities
         public Vector2 vel;
         public int health;
         public bool friendly;
+        public Animation animation = null;
         public AnimationPlayer animationPlayer = new AnimationPlayer();
+        public SpriteEffects spriteEffects = SpriteEffects.None;
 
         public Pawn()
         {
@@ -27,6 +29,11 @@ namespace Halloween.Entities
 
         public override void update(GameTime gameTime)
         {
+        }
+
+        public override void render(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            animationPlayer.Draw(gameTime, spriteBatch, pos, spriteEffects);
         }
     }
 }

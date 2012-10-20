@@ -23,12 +23,9 @@ namespace Halloween.Entities
         public PlayerState playerState;
         public bool isSuper;
 
-        public SuperZombie(Vector2 pos, Animation anim)
+        public SuperZombie(Vector2 pos)
         {
             this.pos = pos;
-            this.animation = anim;
-
-
             this.playerState = PlayerState.Run;
             this.isSuper = true;
         }
@@ -46,10 +43,9 @@ namespace Halloween.Entities
             }
         }
 
-        public void render(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.animation.render(gameTime, spriteBatch, this.pos);
-
+            base.render(gameTime, spriteBatch);
         }
 
         public void playerUpdate(GameTime gameTime)

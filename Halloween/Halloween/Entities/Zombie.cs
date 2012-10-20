@@ -8,7 +8,8 @@ namespace Halloween.Entities
 {
     class Zombie : Pawn
     {
-        public Zombie() {
+        public Zombie() 
+        {
             health = 5;
             friendly = true;
         }

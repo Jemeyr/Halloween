@@ -12,22 +12,14 @@ using Halloween.Graphics;
 
 namespace Halloween.Entities
 {
-    public class Entity
+    public abstract class Entity
     {
         public Vector2 pos;
         public Rectangle collisionBox;
-        public Animation animation;
         public bool right;
 
-        public virtual void update(GameTime gameTime)
-        {
-        }
-
-        public virtual void render(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            this.animation.render(gameTime, spriteBatch, this.pos);
-
-        }
+        public abstract void update(GameTime gameTime);
+        public abstract void render(GameTime gameTime, SpriteBatch spriteBatch);
 
     }
 }

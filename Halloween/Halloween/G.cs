@@ -25,6 +25,7 @@ namespace Halloween
         public static ContentManager content;
         public static GraphicsDevice graphicsDevice;
         public static SpriteFont spriteFont;
+        public static Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
 
         internal static readonly TimeSpan CachedSecond = new TimeSpan(0, 0, 0, 1);
 
@@ -71,6 +72,7 @@ namespace Halloween
             level.LoadMap(@"Levels\1");
             level.mapView = graphicsDevice.Viewport.Bounds;
 
+            animations.Add("zombie", new Animation(Content.Load<Texture2D>("Zombie1")));
 
             //TileArray.addTexture(Content.Load<Texture2D>("Tiles/defaultTile"));
             
@@ -85,7 +87,8 @@ namespace Halloween
             test = Content.Load<Texture2D>("works");
             rot = 0f;
 
-            super = new SuperZombie(Vector2.Zero, new Animation(Content.Load<Texture2D>("Zombie1")));
+            super = new SuperZombie(Vector2.Zero);
+            super.animationPlayer.PlayAnimation(animations["zombie"]);
         }
 
         protected override void Update(GameTime gameTime)
