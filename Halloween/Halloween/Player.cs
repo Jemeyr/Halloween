@@ -37,7 +37,10 @@ namespace Halloween
         {
             foreach (Pawn p in horde)
             {
-                p.render(gameTime, spriteBatch);
+                if (p != currentPawn)
+                {
+                    p.render(gameTime, spriteBatch);
+                }
             }
 
             this.currentPawn.render(gameTime, spriteBatch);
@@ -45,6 +48,11 @@ namespace Halloween
 
         public void update(GameTime gameTime)
         {
+            foreach (Pawn p in horde)
+            {
+                p.update(gameTime);
+            }
+
 
         }
 
