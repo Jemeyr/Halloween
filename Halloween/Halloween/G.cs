@@ -25,6 +25,7 @@ namespace Halloween
         public static ContentManager content;
         public static GraphicsDevice graphicsDevice;
         public static SpriteFont spriteFont;
+        public static Player player;
 
         public static Dictionary<string, Animation> animations = new Dictionary<string, Animation>();
 
@@ -38,12 +39,8 @@ namespace Halloween
         public static Cam2d cam;
         public static Level level;
 
-        Texture2D pawnText;
-
         Texture2D test;
         float rot;
-
-        Zombie super;
 
         public G()
         {
@@ -73,20 +70,14 @@ namespace Halloween
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cam = new Cam2d(GraphicsDevice.Viewport);
 
+            animations.Add("zombie", new Animation(Content.Load<Texture2D>("zombieWalk"), 0.5f, true));
+
             level = new Level(this, spriteBatch);
             level.LoadMap(@"Levels\1");
             level.mapView = graphicsDevice.Viewport.Bounds;
 
-            animations.Add("zombie", new Animation(Content.Load<Texture2D>("zombieWalk"), 0.5f, true));
-
-
-
             test = Content.Load<Texture2D>("works");
             rot = 0f;
-
-            super = new Zombie(new Vector2(64));
-            super.animationPlayer.PlayAnimation(animations["zombie"]);
-
         }
 
         protected override void Update(GameTime gameTime)
@@ -105,12 +96,13 @@ namespace Halloween
             if (input.Players[PlayerIndex.Two].Gamepad[GamepadButtons.B].IsPressed)
                 audio.Play("SFX_Laser");
 
-            super.update(gameTime);
+            level.Update(gameTime);
+
+            if (player != null)
+                player.currentPawn.update(gameTime);
 
             rot += 0.05f;
             //cam.Zoom *= .995f;
-
-            level.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -120,14 +112,13 @@ namespace Halloween
 
             level.Draw(gameTime);
 
+            if (player != null)
+                player.currentPawn.render(gameTime, spriteBatch);
+
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
             spriteBatch.DrawString(spriteFont, cam.Position.ToString(), Vector2.Zero, Color.White);
 
-
-            super.render(gameTime, spriteBatch);
-
             spriteBatch.End();
-
 
             base.Draw(gameTime);
         }

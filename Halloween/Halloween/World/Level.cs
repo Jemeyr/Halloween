@@ -64,13 +64,22 @@ namespace Halloween.World
             {
                 foreach (MapObject mapObject in objectLayer.MapObjects)
                 {
-                    switch (mapObject.Type.ToLower())
-                    {
-                        case "box":
-                            rectangles.Add(mapObject.Bounds);
-                            break;
-                    }
+                    LoadObject(mapObject);
                 }
+            }
+        }
+
+        void LoadObject(MapObject mapObject)
+        {
+            switch (mapObject.Type.ToLower())
+            {
+                case "box":
+                    rectangles.Add(mapObject.Bounds);
+                    break;
+                case "start":
+                    G.player = new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y));
+                    G.player.currentPawn.animationPlayer.PlayAnimation(G.animations["zombie"]);
+                    break;
             }
         }
     }

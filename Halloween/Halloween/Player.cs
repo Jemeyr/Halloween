@@ -16,7 +16,7 @@ using Halloween.Entities;
 
 namespace Halloween
 {
-    class Player
+    public class Player
     {
         public Pawn currentPawn;
         public List<Pawn> horde;

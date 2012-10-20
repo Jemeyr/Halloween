@@ -97,7 +97,7 @@ namespace Halloween.Entities
                     this.pos += vel;
 
 
-                    
+
                     foreach (Rectangle r in G.level.rectangles)
                     {
                         intersect = Rectangle.Intersect(trans, r);
@@ -136,7 +136,7 @@ namespace Halloween.Entities
                     }
 
                     //do collision detection here.
-                    
+
 
                     break;
 
@@ -237,7 +237,7 @@ namespace Halloween.Entities
             switch (playerState)
             {
                 case PlayerState.Run:
-                    
+
                     /*
                     if (G.input.Keyboard[Keys.A].IsDown)
                     {
@@ -300,7 +300,7 @@ namespace Halloween.Entities
 
 
                     break;
-                
+
                 case PlayerState.Jump:
                     //gravity accel
                     vel.Y += 0.05f;

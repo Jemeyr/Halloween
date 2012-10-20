@@ -12,7 +12,7 @@ using Halloween.Graphics;
 
 namespace Halloween.Entities
 {
-    class Pawn : Entity
+    public class Pawn : Entity
     {
         public Vector2 vel;
         public int health;
