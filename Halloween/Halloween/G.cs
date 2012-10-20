@@ -104,9 +104,6 @@ namespace Halloween
             if (input.Players[PlayerIndex.Two].Gamepad[GamepadButtons.B].IsPressed)
                 audio.Play("SFX_Laser");
 
-            if (input.Keyboard[Keys.Down].IsDown)
-                cam.MoveCamera(new Vector2(0, -1));
-
             super.update(gameTime);
 
             rot += 0.05f;

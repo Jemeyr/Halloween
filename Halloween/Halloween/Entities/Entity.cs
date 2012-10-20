@@ -23,7 +23,7 @@ namespace Halloween.Entities
         {
         }
 
-        public void render(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             this.animation.render(gameTime, spriteBatch, this.pos);
 

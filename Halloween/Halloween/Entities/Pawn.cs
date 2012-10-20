@@ -17,12 +17,16 @@ namespace Halloween.Entities
         public Vector2 vel;
         public int health;
         public bool friendly;
+        public AnimationPlayer animationPlayer = new AnimationPlayer();
 
-        public Pawn() {
-            collisionBox = new Rectangle(0, 0, 24, 64);
+        public Pawn()
+        {
+            collisionBox.Width = 24;
+            collisionBox.Height = 64;
         }
 
-        public override void update(GameTime gameTime) {
+        public override void update(GameTime gameTime)
+        {
         }
     }
 }

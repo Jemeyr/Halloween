@@ -15,8 +15,6 @@ namespace Halloween.World
 {
     public class Level : DrawableGameComponent
     {
-        //public TileArray tileArray;
-
         public FuncWorks.XNA.XTiled.Map map;
         public SpriteBatch spriteBatch;
         public List<Entity> entities = new List<Entity>();
@@ -32,22 +30,10 @@ namespace Halloween.World
             : base(game)
         {
             spriteBatch = sb;
-            //this.tileArray = new TileArray();
         }
 
         public override void Draw(GameTime gameTime)
         {
-            //tileArray.render(spriteBatch);
-            Rectangle delta = mapView;
-            if (G.input.Keyboard[Keys.Down].IsPressed)
-                delta.Y += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
-            if (G.input.Keyboard[Keys.Up].IsPressed)
-                delta.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
-            if (G.input.Keyboard[Keys.Right].IsPressed)
-                delta.X += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
-            if (G.input.Keyboard[Keys.Left].IsPressed)
-                delta.X -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds / 4);
-
             map.Draw(spriteBatch, mapView);
             foreach (Entity entity in entities)
             {

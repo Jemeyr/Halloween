@@ -18,7 +18,6 @@ namespace Halloween
 {
     class Player
     {
-
         public Pawn super;
         public List<Pawn> horde;
 
@@ -44,8 +43,6 @@ namespace Halloween
                 super = horde.ElementAt(pos);
                 //change the thing here for which is super
             }
- 
-            
         }
 
     }
