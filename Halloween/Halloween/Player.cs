@@ -18,29 +18,32 @@ namespace Halloween
 {
     class Player
     {
-        public Pawn super;
+        public Pawn currentPawn;
         public List<Pawn> horde;
 
-        public Player(Pawn super, Vector2 startingPos)
+        public Player(Vector2 startingPos)
         {
-            this.super = super;
-            this.super.pos = startingPos;
-
+            this.currentPawn = new Zombie(startingPos);
+            ((Zombie)this.currentPawn).isSuper = true;
+            
             this.horde = new List<Pawn>();
-            horde.Add(super);
+            horde.Add(currentPawn);
         }
 
         public void cycle(int dir)
         {
-            int oldSuper = horde.IndexOf(super);
 
-            int pos = oldSuper+ dir ;
+            Pawn oldSuper = currentPawn;
+
+            int pos = horde.IndexOf(currentPawn)+ dir ;
 
             pos %= horde.Count;
 
             if(horde.ElementAt(pos) != null)
             {
-                super = horde.ElementAt(pos);
+                currentPawn = horde.ElementAt(pos);
+                ((Zombie)currentPawn).isSuper = true;
+                ((Zombie)oldSuper).isSuper = false;
                 //change the thing here for which is super
             }
         }

@@ -116,7 +116,6 @@
     <Compile Include="Entities\Human.cs" />
     <Compile Include="Entities\Kid.cs" />
     <Compile Include="Entities\Pawn.cs" />
-    <Compile Include="Entities\SuperZombie.cs" />
     <Compile Include="Entities\Zombie.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\AnimationPlayer.cs" />

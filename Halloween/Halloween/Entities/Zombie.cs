@@ -31,7 +31,7 @@ namespace Halloween.Entities
 
             this.facesRight = true;
             this.playerState = PlayerState.Jump;
-            this.isSuper = true;
+            this.isSuper = false;
         }
 
 
