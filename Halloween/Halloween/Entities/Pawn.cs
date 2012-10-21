@@ -49,5 +49,60 @@ namespace Halloween.Entities
         {
             animationPlayer.Draw(gameTime, spriteBatch, pos, spriteEffects);
         }
+
+
+
+
+        public Vector2 checkPosition(Vector2 nextPosition)
+        {
+
+            Rectangle intersect;
+            Rectangle trans = this.collisionBox;
+
+            trans.X += (int)nextPosition.X;
+            trans.Y += (int)nextPosition.Y;
+
+
+            foreach (Rectangle r in G.level.rectangles)
+            {
+                intersect = Rectangle.Intersect(trans, r);
+                if (!intersect.IsEmpty)
+                {
+                    //find minor axis
+                    int y = intersect.Height;
+                    int x = intersect.Width;
+
+                    if (x < y)
+                    {
+                        //resolve in x axis
+                        if (r.X < trans.X)
+                        {
+                            nextPosition.X += x;
+                        }
+                        else
+                        {
+                            nextPosition.X -= x;
+                        }
+                    }
+                    else
+                    {
+                        //resolve in y axis
+                        if (r.Y < trans.Y)
+                        {
+                            nextPosition.Y += y;
+                        }
+                        else
+                        {
+                            nextPosition.Y -= y;
+                        }
+                    }
+                }
+            }
+
+            return nextPosition;
+        }
+
+
+
     }
 }

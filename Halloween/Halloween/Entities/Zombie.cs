@@ -13,7 +13,7 @@ using Halloween.Entities;
 
 namespace Halloween.Entities
 {
-    enum Order {Follow, Stay, Charge}
+    enum Order { Follow, Stay, Charge }
 
     enum PlayerState { Run, Jump, Lunge, Sit, LungeStunned }
     //you can run with speed zero and that's still running. 
@@ -24,8 +24,8 @@ namespace Halloween.Entities
         public const float GRAVITY = .12f;
         public const float GROUNDCOOLDOWN = 0.2f;//how your velocity slows down on the ground
         public const float AIRCOOLDOWN = 0.2f;//how your velocity slows down in the air
-        public const float JUMPSPEED = 4.2f;
-        public const float LUNGESPEED = 5f;
+        public const float JUMPSPEED = 3.2f;
+        public const float LUNGESPEED = 15f;
         public const float LUNGEHEIGHT = 1.2f;
 
         public Order order;
@@ -56,38 +56,14 @@ namespace Halloween.Entities
         public override void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.render(gameTime, spriteBatch);
+            spriteBatch.DrawString(G.spriteFont, playerState.ToString(), pos + Vector2.UnitY * -10f, Color.White);
+
         }
 
         public void playerUpdate(GameTime gameTime)
         {
 
-            switch (playerState)
-            {
-                case PlayerState.Run:
-                    handlePlayerInput();
-                    move();
-                    break;
-                case PlayerState.Jump:
-                    handlePlayerInput();
-                    move();
-                    break;
-
-                case PlayerState.Lunge:
-                    move();
-                    break;
-
-                case PlayerState.LungeStunned:
-                    move();
-                    break;
-
-                case PlayerState.Sit:
-                    handlePlayerInput();
-                    break;
-
-                default:
-                    Console.Out.WriteLine("Player in invalid state");
-                    break;
-            }
+            handlePlayerInput(playerState);
 
         }
 
@@ -95,19 +71,13 @@ namespace Halloween.Entities
 
         public void zombieUpdate(GameTime gameTime)
         {
-            switch(order)
+            switch (order)
             {
                 case Order.Stay:
-                    handlePlayerInput();
-                    move();
                     break;
                 case Order.Charge:
-                    handlePlayerInput();
-                    move();
                     break;
                 case Order.Follow:
-                    handlePlayerInput();
-                    move();
                     break;
             }
 
@@ -120,111 +90,150 @@ namespace Halloween.Entities
             vel.Y += GRAVITY;
         }
 
-        public void handlePlayerInput()
-        {
-            bool inAir = playerState == PlayerState.Jump;
-            if (G.input.Keyboard[Keys.A].IsDown)
-            {
-                facesRight = false;
-                vel.X = -CHARSPEED;
-            }
-            else if (G.input.Keyboard[Keys.D].IsDown)
-            {
-                facesRight = true;
-                vel.X = CHARSPEED;
-            }
-            else
-            {
-                vel.X *= GROUNDCOOLDOWN;
-            }
-
-            if (G.input.Keyboard[Keys.L].IsDown && playerState == PlayerState.Run)
-            {
-                playerState = PlayerState.Lunge;
-                vel.X = LUNGESPEED * (facesRight ? 1f : -1f);
-                vel.Y = -LUNGEHEIGHT;
-            }
-
-            if (G.input.Keyboard[Keys.Space].IsDown)
-            {
-                if (!inAir)
-                {
-                    vel.Y = -JUMPSPEED;
-                    this.playerState = PlayerState.Jump;
-                }
-                else
-                {
-                    vel.Y += GRAVITY * .75f;
-                }
-            }
-            else
-            {
-                vel.Y += GRAVITY;
-            }
-
-        }
-
-
-        public void move()
+        public void handlePlayerInput(PlayerState playerState)
         {
 
-            Vector2 newPos = this.pos + vel;
+            Vector2 targetPos = Vector2.Zero;
 
-            Rectangle intersect;
-            Rectangle trans = this.collisionBox;
-
-            trans.X += (int)newPos.X;
-            trans.Y += (int)newPos.Y;
-
-            bool hitY = false;
-
-            foreach (Rectangle r in G.level.rectangles)
+            switch (playerState)
             {
-                intersect = Rectangle.Intersect(trans, r);
-                if (!intersect.IsEmpty)
-                {
-                    //find minor axis
-                    int y = intersect.Height;
-                    int x = intersect.Width;
-
-                    if (x < y)
+                case PlayerState.Run:
+                    //vel = Vector2.Zero;
+                    if (G.input.Keyboard[Keys.A].IsDown)
                     {
-                        //resolve in x axis
-                        if (r.X < trans.X)
-                        {
-                            newPos.X += x;
-                        }
-                        else
-                        {
-                            newPos.X -= x;
-                        }
+                        facesRight = false;
+                        vel.X = -CHARSPEED;
+                    }
+                    else if (G.input.Keyboard[Keys.D].IsDown)
+                    {
+                        facesRight = true;
+                        vel.X = CHARSPEED;
                     }
                     else
                     {
-                        hitY = true;
-                        //resolve in y axis
-                        if (r.Y < trans.Y)
-                        {
-                            newPos.Y += y;
-                        }
-                        else
-                        {
-                            newPos.Y -= y;
-                        }
+                        vel.X *= GROUNDCOOLDOWN;
                     }
-                }
+
+
+                    if (G.input.Keyboard[Keys.L].IsDown)
+                    {
+                        playerState = PlayerState.Lunge;
+                        vel.X = LUNGESPEED * (facesRight ? 1f : -1f);
+                        vel.Y = -LUNGEHEIGHT;
+                    }
+
+                    if (G.input.Keyboard[Keys.Space].IsPressed)
+                    {
+                        vel.Y = -JUMPSPEED;
+                        this.playerState = PlayerState.Jump;
+                        return;
+                    }
+
+                    
+                    targetPos = this.pos + vel;
+
+                    //targetpos is position before gravity
+                    vel.Y += 1f;
+
+                    break;
+                case PlayerState.Jump:
+                    if (G.input.Keyboard[Keys.A].IsDown)
+                    {
+                        facesRight = false;
+                        vel.X = -CHARSPEED;
+                    }
+                    else if (G.input.Keyboard[Keys.D].IsDown)
+                    {
+                        facesRight = true;
+                        vel.X = CHARSPEED;
+                    }
+                    else
+                    {
+                        vel.X *= GROUNDCOOLDOWN;
+                    }
+
+
+                    if (G.input.Keyboard[Keys.Space].IsDown)
+                    {
+                        vel.Y += GRAVITY * .75f;
+                    }
+                    else
+                    {
+                        vel.Y += GRAVITY;
+                    }
+
+                    targetPos = this.pos + vel;
+
+                    break;
+
+                case PlayerState.Lunge:
+                    break;
+
+                case PlayerState.LungeStunned:
+                    break;
+
+                case PlayerState.Sit:
+                    break;
+
+                default:
+                    Console.Out.WriteLine("Player in invalid state");
+                    break;
             }
 
-            if ((Math.Abs(this.pos.Y - newPos.Y) < 2f) && hitY)
+
+
+
+            Vector2 nextPos = checkPosition(this.pos + vel);
+            nextPos.X = (int)nextPos.X;
+            nextPos.Y = (int)nextPos.Y;
+
+            targetPos.X = (int)targetPos.X;
+            targetPos.Y = (int)targetPos.Y;
+
+
+            this.pos = nextPos;
+
+
+            //make it so it doesn't expect gravity
+            if (playerState == PlayerState.Run)
             {
-                this.playerState = PlayerState.Run;
-                this.vel.Y = 0f;
+                vel.Y = GRAVITY;
             }
-            else
+
+
+
+            //fall off edge
+            if (nextPos.Y > targetPos.Y)
             {
-                this.pos.Y = newPos.Y;
+                if (playerState == PlayerState.Run)
+                {
+                    this.playerState = PlayerState.Jump;
+                   // vel.Y = GRAVITY;
+                    return;
+                }
+
             }
-            this.pos.X = newPos.X;
+
+            //fall into ledge
+            if (nextPos.Y < targetPos.Y)
+            {
+                if (playerState == PlayerState.Jump)
+                {
+                    this.vel.Y = 0;
+                    this.playerState = PlayerState.Run;
+                    return;
+
+                }
+
+            }
+
+            //hit wall
+            if (nextPos.X != targetPos.X)
+            {
+
+            }
+
+
 
         }
 
