@@ -15,8 +15,6 @@ namespace Halloween.Entities
     public class Entity
     {
         public Vector2 pos;
-        public Rectangle collisionBox;
-        public Color color = Color.White;
 
         public virtual void update(GameTime gameTime)
         {

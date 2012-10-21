@@ -76,9 +76,15 @@ namespace Halloween.Entities
             {
                 this.pos = nextPos;
             }
-           
+        }
 
-
+        public virtual void onHit(Pawn otherPawn)
+        {
+            if (otherPawn is Zombie)
+            {
+                G.level.pawns.Remove(this);
+                Player.horde.Add(this);
+            }
         }
     }
 }

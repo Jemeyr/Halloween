@@ -21,6 +21,9 @@ namespace Halloween.Entities
         public AnimationPlayer animationPlayer = new AnimationPlayer();
         public SpriteEffects spriteEffects = SpriteEffects.None;
         public bool facesRight = true;
+        public Rectangle collisionBox;
+        public Rectangle positionCollisionBox;
+        public Color color = Color.White;
 
         public bool isPlayer
         {
@@ -35,6 +38,8 @@ namespace Halloween.Entities
 
         public override void update(GameTime gameTime)
         {
+            positionCollisionBox.X = (int)pos.X;
+            positionCollisionBox.Y = (int)pos.Y;
             if (isPlayer)
             {
                 if (G.input.Keyboard[Keys.A].IsDown)
@@ -50,9 +55,6 @@ namespace Halloween.Entities
             animationPlayer.Draw(gameTime, spriteBatch, pos, spriteEffects);
            // spriteBatch.Draw(G.pixelTexture, new Rectangle((int)pos.X,(int)pos.Y,collisionBox.Width, collisionBox.Height), Color.Red);
         }
-
-
-
 
         public Vector2 checkPosition(Vector2 nextPosition)
         {
@@ -103,7 +105,9 @@ namespace Halloween.Entities
             return nextPosition;
         }
 
-
+        public virtual void onHit(Pawn otherPawn)
+        {
+        }
 
     }
 }

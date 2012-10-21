@@ -56,7 +56,7 @@ namespace Halloween.Entities
         public override void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.render(gameTime, spriteBatch);
-            spriteBatch.DrawString(G.spriteFont, playerState.ToString(), pos + Vector2.UnitY * -10f, Color.White);
+            //spriteBatch.DrawString(G.spriteFont, playerState.ToString(), pos + Vector2.UnitY * -10f, Color.White);
 
         }
 

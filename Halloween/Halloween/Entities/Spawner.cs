@@ -10,6 +10,8 @@ namespace Halloween.Entities
     {
         public float spawnTime = 5;
         float spawnTimer;
+        public int max = 5;
+        int added;
 
         public override void update(GameTime gameTime)
         {
@@ -18,8 +20,13 @@ namespace Halloween.Entities
             if (spawnTimer >= spawnTime)
             {
                 spawnTimer = 0;
-                G.level.entities.Add(create());
+                if (added < max)
+                {
+                    G.level.pawns.Add(create());
+                    added += 1;
+                }
             }
+            //if (G.input.Keyboard[Microsoft.Xna.Framework.Inp])
         }
 
         public abstract Pawn create();
