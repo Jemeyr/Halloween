@@ -46,30 +46,26 @@ namespace Halloween
 
         public static void update(GameTime gameTime)
         {
+
+            if (G.input.Keyboard[Keys.Q].IsPressed)
+            {
+                currentPawnIndex -= 1;
+                if (currentPawnIndex < 0)
+                    currentPawnIndex = horde.Count - 1;
+            }
+
+            if (G.input.Keyboard[Keys.E].IsPressed)
+            {
+                currentPawnIndex += 1;
+                if (currentPawnIndex >= horde.Count)
+                    currentPawnIndex = 0;
+            }
+
             foreach (Pawn p in horde)
             {
                 p.update(gameTime);
             }
+
         }
-
-        //public static void cycleLeft()
-        //{
-        //    if ()
-
-
-        //    Pawn oldSuper = currentPawn;
-
-        //    int pos = horde.IndexOf(currentPawn)+ dir ;
-
-        //    pos %= horde.Count;
-
-        //    if(horde.ElementAt(pos) != null)
-        //    {
-        //        currentPawn = horde.ElementAt(pos);
-        //        //((Zombie)oldSuper).isSuper = false;
-        //        //change the thing here for which is super
-        //    }
-        //}
-
     }
 }

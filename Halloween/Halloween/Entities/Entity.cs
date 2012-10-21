@@ -16,14 +16,10 @@ namespace Halloween.Entities
     {
         public Vector2 pos;
         public Rectangle collisionBox;
-        public bool facesRight;
+        public Color color = Color.White;
 
         public virtual void update(GameTime gameTime)
         {
-            if (G.input.Keyboard[Keys.A].IsDown)
-                facesRight = false;
-            else if (G.input.Keyboard[Keys.D].IsDown)
-                facesRight = true;
         }
 
         public virtual void render(GameTime gameTime, SpriteBatch spriteBatch)

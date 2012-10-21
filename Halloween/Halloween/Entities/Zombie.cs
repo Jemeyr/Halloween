@@ -30,16 +30,10 @@ namespace Halloween.Entities
 
         public Order order;
         public PlayerState playerState;
-        public bool isPlayer
-        {
-            get { return this == Player.currentPawn; }
-        }
 
         public Zombie(Vector2 pos)
         {
             this.pos = pos;
-
-            this.facesRight = true;
             this.playerState = PlayerState.Jump;
             this.order = Order.Follow;
             animationPlayer.PlayAnimation(G.animations["zombie"]);
@@ -60,7 +54,6 @@ namespace Halloween.Entities
 
         public override void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.spriteEffects = facesRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             base.render(gameTime, spriteBatch);
         }
 

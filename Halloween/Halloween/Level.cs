@@ -33,10 +33,8 @@ namespace Halloween
         public override void Draw(GameTime gameTime)
         {
             map.Draw(G.spriteBatch, mapView);
-            foreach (Entity entity in entities)
-            {
-                entity.render(gameTime, G.spriteBatch);
-            }
+            for (var x = 0; x < entities.Count; x++)
+                entities[x].render(gameTime, G.spriteBatch);
 
 /*            foreach (Rectangle r in this.rectangles)
             {
@@ -49,11 +47,8 @@ namespace Halloween
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            foreach (Entity entity in entities)
-            {
-                entity.update(gameTime);
-            }
-
+            for (var x = 0; x < entities.Count; x++)
+                entities[x].update(gameTime);
         }
 
         public void LoadMap(string mapName)
@@ -70,14 +65,18 @@ namespace Halloween
 
         void LoadObject(MapObject mapObject)
         {
+            Vector2 objectPos = new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y);
             switch (mapObject.Type.ToLower())
             {
                 case "box":
                     rectangles.Add(mapObject.Bounds);
                     break;
                 case "start":
-                    Player.currentPawn.pos = new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y);
+                    Player.currentPawn.pos = objectPos;
                     G.cam.Follow(Player.currentPawn);
+                    break;
+                case "kidspawner":
+                    entities.Add(new KidSpawner() { pos = objectPos});
                     break;
             }
         }

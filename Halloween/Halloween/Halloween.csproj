@@ -116,7 +116,9 @@
     <Compile Include="Entities\Human.cs" />
     <Compile Include="Entities\Kid.cs" />
     <Compile Include="Entities\Pawn.cs" />
+    <Compile Include="Entities\Spawner.cs" />
     <Compile Include="Entities\Zombie.cs" />
+    <Compile Include="Entities\KidSpawner.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\AnimationPlayer.cs" />
     <Compile Include="Camera.cs" />

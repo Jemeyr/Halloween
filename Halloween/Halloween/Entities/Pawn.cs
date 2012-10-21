@@ -20,6 +20,12 @@ namespace Halloween.Entities
         public Animation animation = null;
         public AnimationPlayer animationPlayer = new AnimationPlayer();
         public SpriteEffects spriteEffects = SpriteEffects.None;
+        public bool facesRight = true;
+
+        public bool isPlayer
+        {
+            get { return this == Player.currentPawn; }
+        }
 
         public Pawn()
         {
@@ -29,6 +35,14 @@ namespace Halloween.Entities
 
         public override void update(GameTime gameTime)
         {
+            if (isPlayer)
+            {
+                if (G.input.Keyboard[Keys.A].IsDown)
+                    facesRight = false;
+                else if (G.input.Keyboard[Keys.D].IsDown)
+                    facesRight = true;
+                this.spriteEffects = facesRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            }
         }
 
         public override void render(GameTime gameTime, SpriteBatch spriteBatch)
