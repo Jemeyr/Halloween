@@ -8,23 +8,30 @@ using Microsoft.Xna.Framework;
 namespace Halloween.Entities
 {
     enum Type { kid, military, police }
+
     class Human : Pawn
     {
         public Type type;
         public bool armed;
 
-        public Human(Type type) {
+        public Human(Type type) 
+        {
             health = 2;
             this.type = type;
-            if (this.type != 0) {
+            if (this.type != 0) 
+            {
                 armed = true;
             }
         }
 
-        public override void update(GameTime gameTime) {
-            if (armed) {
+        public override void update(GameTime gameTime)
+        {
+            if (armed)
+            {
                 //TODO: attack AI
-            } else {
+            }
+            else 
+            {
                 //TODO: run away AI
             }
         }

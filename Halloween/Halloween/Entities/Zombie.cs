@@ -24,27 +24,25 @@ namespace Halloween.Entities
         public const float AIRCOOLDOWN = 0.2f;//how your velocity slows down in the air
         public const float JUMPSPEED = 3f;
 
-
-
-        GameTime actionStart;
         public PlayerState playerState;
-        public bool isSuper;
-        public bool facesRight;
+        public bool isPlayer
+        {
+            get { return this == Player.currentPawn; }
+        }
 
         public Zombie(Vector2 pos)
         {
             this.pos = pos;
 
             this.facesRight = true;
-            this.playerState = PlayerState.Run;
-            this.isSuper = false;
+            this.playerState = PlayerState.Jump;
             animationPlayer.PlayAnimation(G.animations["zombie"]);
         }
 
 
         public override void update(GameTime gameTime)
         {
-            if (isSuper)
+            if (isPlayer)
             {
                 playerUpdate(gameTime);
             }
@@ -59,8 +57,6 @@ namespace Halloween.Entities
             this.spriteEffects = facesRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             base.render(gameTime, spriteBatch);
         }
-
-        
 
         public void playerUpdate(GameTime gameTime)
         {

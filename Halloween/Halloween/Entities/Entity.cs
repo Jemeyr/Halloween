@@ -12,14 +12,23 @@ using Halloween.Graphics;
 
 namespace Halloween.Entities
 {
-    public abstract class Entity
+    public class Entity
     {
         public Vector2 pos;
         public Rectangle collisionBox;
-        public bool right;
+        public bool facesRight;
 
-        public abstract void update(GameTime gameTime);
-        public abstract void render(GameTime gameTime, SpriteBatch spriteBatch);
+        public virtual void update(GameTime gameTime)
+        {
+            if (G.input.Keyboard[Keys.A].IsDown)
+                facesRight = false;
+            else if (G.input.Keyboard[Keys.D].IsDown)
+                facesRight = true;
+        }
+
+        public virtual void render(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+        }
 
     }
 }

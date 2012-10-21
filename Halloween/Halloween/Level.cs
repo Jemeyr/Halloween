@@ -20,9 +20,6 @@ namespace Halloween
         public Rectangle mapView = new Rectangle();
         public List<Rectangle> rectangles = new List<Rectangle>();
 
-        public List<Player> players = new List<Player>();
-        
-        
         public ContentManager Content
         {
             get { return Game.Content; }
@@ -41,11 +38,6 @@ namespace Halloween
                 entity.render(gameTime, G.spriteBatch);
             }
 
-            foreach (Player player in players)
-            {
-                player.render(gameTime, G.spriteBatch);
-            }
-
 /*            foreach (Rectangle r in this.rectangles)
             {
                 spriteBatch.Draw(G.pixelTexture, r, Color.Yellow);
@@ -60,11 +52,6 @@ namespace Halloween
             foreach (Entity entity in entities)
             {
                 entity.update(gameTime);
-            }
-
-            foreach (Player player in players)
-            {
-                player.update(gameTime);
             }
 
         }
@@ -89,8 +76,8 @@ namespace Halloween
                     rectangles.Add(mapObject.Bounds);
                     break;
                 case "start":
-                    players.Add(new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y)));
-                    G.cam.Follow(players[0].currentPawn);
+                    Player.currentPawn.pos = new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y);
+                    G.cam.Follow(Player.currentPawn);
                     break;
             }
         }

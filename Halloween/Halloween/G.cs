@@ -88,6 +88,8 @@ namespace Halloween
 
             level.Update(gameTime);
 
+            Player.update(gameTime);
+
             rot += 0.05f;
         }
 
@@ -99,6 +101,8 @@ namespace Halloween
             level.Draw(gameTime);
 
             spriteBatch.Draw(test, new Vector2(360f,240f), null, Color.White, rot, new Vector2(400f, 250f), .25f, SpriteEffects.None, 1);
+
+            Player.render(gameTime, spriteBatch);
 
             spriteBatch.End();
 

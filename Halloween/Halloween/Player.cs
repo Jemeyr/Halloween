@@ -15,63 +15,61 @@ using Halloween.Entities;
 
 namespace Halloween
 {
-    public class Player
+    public static class Player
     {
-        public Pawn currentPawn;
-        public List<Pawn> horde;
-
-        public Player(Vector2 startingPos)
+        public static Pawn currentPawn
         {
-            this.currentPawn = new Zombie(startingPos);
-            ((Zombie)this.currentPawn).isSuper = true;
-            
-            this.horde = new List<Pawn>();
-            horde.Add(currentPawn);
-
-            horde.Add(new Zombie(startingPos + new Vector2(64, 0)));
-
+            get 
+            { 
+                return horde[currentPawnIndex];
+            }
         }
 
-        public void render(GameTime gameTime, SpriteBatch spriteBatch)
+        public static List<Pawn> horde = new List<Pawn>();
+        public static int currentPawnIndex = 0;
+
+        static Player()
+        {
+            horde.Add(new Zombie(Vector2.Zero));
+        }
+
+        public static void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             foreach (Pawn p in horde)
             {
-                if (p != currentPawn)
-                {
-                    p.render(gameTime, spriteBatch);
-                }
+                if (p == currentPawn)
+                    continue;
             }
 
-            this.currentPawn.render(gameTime, spriteBatch);
+            currentPawn.render(gameTime, spriteBatch);
         }
 
-        public void update(GameTime gameTime)
+        public static void update(GameTime gameTime)
         {
             foreach (Pawn p in horde)
             {
                 p.update(gameTime);
             }
-
-
         }
 
-        public void cycle(int dir)
-        {
+        //public static void cycleLeft()
+        //{
+        //    if ()
 
-            Pawn oldSuper = currentPawn;
 
-            int pos = horde.IndexOf(currentPawn)+ dir ;
+        //    Pawn oldSuper = currentPawn;
 
-            pos %= horde.Count;
+        //    int pos = horde.IndexOf(currentPawn)+ dir ;
 
-            if(horde.ElementAt(pos) != null)
-            {
-                currentPawn = horde.ElementAt(pos);
-                ((Zombie)currentPawn).isSuper = true;
-                ((Zombie)oldSuper).isSuper = false;
-                //change the thing here for which is super
-            }
-        }
+        //    pos %= horde.Count;
+
+        //    if(horde.ElementAt(pos) != null)
+        //    {
+        //        currentPawn = horde.ElementAt(pos);
+        //        //((Zombie)oldSuper).isSuper = false;
+        //        //change the thing here for which is super
+        //    }
+        //}
 
     }
 }
