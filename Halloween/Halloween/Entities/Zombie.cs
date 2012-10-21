@@ -22,7 +22,7 @@ namespace Halloween.Entities
         public const float GRAVITY = .12f;
         public const float GROUNDCOOLDOWN = 0.2f;//how your velocity slows down on the ground
         public const float AIRCOOLDOWN = 0.2f;//how your velocity slows down in the air
-        public const float JUMPSPEED = 3f;
+        public const float JUMPSPEED = 4.2f;
 
         public PlayerState playerState;
         public bool isPlayer
@@ -106,10 +106,14 @@ namespace Halloween.Entities
                 vel.X *= GROUNDCOOLDOWN;
             }
 
-            if (G.input.Keyboard[Keys.Space].IsPressed && !inAir)
+            if (G.input.Keyboard[Keys.Space].IsPressed)
             {
-                vel.Y = -JUMPSPEED;
-                this.playerState = PlayerState.Jump;
+                if (!inAir)
+                {
+
+                    vel.Y = -JUMPSPEED;
+                    this.playerState = PlayerState.Jump;
+                }
             }
             else
             {
