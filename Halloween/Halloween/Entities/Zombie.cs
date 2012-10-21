@@ -141,6 +141,7 @@ namespace Halloween.Entities
             {
                 playerState = PlayerState.Lunge;
                 vel.X = LUNGESPEED * (facesRight ? 1f : -1f);
+                vel.Y = -LUNGEHEIGHT;
             }
 
             if (G.input.Keyboard[Keys.Space].IsDown)
