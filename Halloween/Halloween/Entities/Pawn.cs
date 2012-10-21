@@ -48,6 +48,7 @@ namespace Halloween.Entities
         public override void render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             animationPlayer.Draw(gameTime, spriteBatch, pos, spriteEffects);
+           // spriteBatch.Draw(G.pixelTexture, new Rectangle((int)pos.X,(int)pos.Y,collisionBox.Width, collisionBox.Height), Color.Red);
         }
 
 
