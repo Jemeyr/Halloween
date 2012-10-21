@@ -90,6 +90,7 @@ namespace Halloween
                     break;
                 case "start":
                     players.Add(new Player(new Vector2(mapObject.Bounds.X, mapObject.Bounds.Y)));
+                    G.cam.Follow(players[0].currentPawn);
                     break;
             }
         }

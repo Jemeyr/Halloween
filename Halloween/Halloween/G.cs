@@ -34,7 +34,7 @@ namespace Halloween
         public static AudioManager audio;
         public static InputManager input;
 
-        public static Cam2d cam;
+        public static Camera cam;
         public static Level level;
 
         Texture2D test;
@@ -66,9 +66,9 @@ namespace Halloween
             Components.Add(input);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cam = new Cam2d(GraphicsDevice.Viewport);
+            cam = new Camera();
 
-            animations.Add("zombie", new Animation(Content.Load<Texture2D>("zombieWalk"), 0.5f, true));
+            animations.Add("zombie", new Animation(Content.Load<Texture2D>("zombieWalk"), 0.25f, true));
 
             level = new Level(this);
             level.LoadMap(@"Levels\1");
@@ -81,7 +81,9 @@ namespace Halloween
         {
             base.Update(gameTime);
 
-            if (input.Keyboard[Keys.Escape].IsPressed)
+            cam.Update(gameTime);
+
+            if (input.Keyboard[Keys.Escape].IsPressed || input.Players[PlayerIndex.One].Gamepad[GamepadButtons.Back].IsPressed)
                 this.Exit();
 
             level.Update(gameTime);
@@ -92,7 +94,7 @@ namespace Halloween
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkSlateBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, cam.GetCameraTransformation());
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, cam.View);
 
             level.Draw(gameTime);
 

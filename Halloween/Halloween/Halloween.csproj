@@ -119,7 +119,7 @@
     <Compile Include="Entities\Zombie.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\AnimationPlayer.cs" />
-    <Compile Include="Graphics\Cam2d.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Input\ButtonState.cs" />
     <Compile Include="Input\Gamepad.cs" />
     <Compile Include="Input\GamepadButtons.cs" />
