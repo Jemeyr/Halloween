@@ -75,8 +75,23 @@ namespace Halloween
                     Player.currentPawn.pos = objectPos;
                     G.cam.Follow(Player.currentPawn);
                     break;
-                case "kidspawner":
-                    entities.Add(new KidSpawner() { pos = objectPos});
+                case "spawner":
+                    var pawnType = string.Empty;
+                    if (mapObject.Properties.ContainsKey("pawntype"))
+                    {
+                        pawnType = mapObject.Properties["pawntype"].Value;
+                    }
+                    var spawntime = 0f;
+                    if (mapObject.Properties.ContainsKey("spawntime"))
+                    {
+                        spawntime = mapObject.Properties["spawntime"].AsSingle.Value;
+                    }
+                    switch (pawnType)
+                    {
+                        case "kid":
+                            entities.Add(new KidSpawner() { pos = objectPos, spawnTime = spawntime });
+                            break;
+                    }
                     break;
             }
         }

@@ -42,6 +42,7 @@ namespace Halloween.Entities
 
         public override void update(GameTime gameTime)
         {
+            base.update(gameTime);
             if (isPlayer)
             {
                 playerUpdate(gameTime);
