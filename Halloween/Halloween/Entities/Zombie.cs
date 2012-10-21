@@ -36,7 +36,7 @@ namespace Halloween.Entities
             this.pos = pos;
 
             this.facesRight = true;
-            this.playerState = PlayerState.Jump;
+            this.playerState = PlayerState.Run;
             this.isSuper = false;
             animationPlayer.PlayAnimation(G.animations["zombie"]);
         }
@@ -60,158 +60,18 @@ namespace Halloween.Entities
             base.render(gameTime, spriteBatch);
         }
 
+        
+
         public void playerUpdate(GameTime gameTime)
         {
-            Rectangle intersect;
-            Rectangle trans = this.collisionBox;
-
-            trans.X += (int)this.pos.X;
-            trans.Y += (int)this.pos.Y;
 
             switch (playerState)
             {
                 case PlayerState.Run:
-                    if (G.input.Keyboard[Keys.A].IsDown)
-                    {
-                        facesRight = false;
-                        vel.X = -CHARSPEED;
-                    }
-                    else if (G.input.Keyboard[Keys.D].IsDown)
-                    {
-                        facesRight = true;
-                        vel.X = CHARSPEED;
-                    }
-                    else
-                    {
-                        vel.X *= GROUNDCOOLDOWN;
-                    }
-
-
-
-                    if (G.input.Keyboard[Keys.Space].IsPressed)
-                    {
-                        vel.Y = -JUMPSPEED;
-                        this.playerState = PlayerState.Jump;
-                        actionStart = gameTime;
-                    }
-
-                    if ((G.input.Keyboard[Keys.L].IsPressed))
-                    {
-                        this.playerState = PlayerState.Lunge;
-                        actionStart = gameTime;
-                    }
-
-                    //this.pos += vel;
-                    this.pos.X += (int)vel.X;
-                    this.pos.Y += (int)vel.Y;
-
-
-                    foreach (Rectangle r in G.level.rectangles)
-                    {
-                        intersect = Rectangle.Intersect(trans, r);
-                        if (!intersect.IsEmpty)
-                        {
-                            //find minor axis
-                            int y = intersect.Height;
-                            int x = intersect.Width;
-
-                            if (x < y)
-                            {
-                                //resolve in x axis
-                                if (r.X < trans.X)
-                                {
-                                    this.pos.X += x;
-                                }
-                                else
-                                {
-                                    this.pos.X -= x;
-                                }
-                            }
-                            else
-                            {
-                                //resolve in y axis
-                                if (r.Y < trans.Y)
-                                {
-                                    this.pos.Y += y;
-                                }
-                                else
-                                {
-                                    this.pos.Y -= y;
-                                }
-                            }
-                            break;
-                        }
-                    }
-
-                    //do collision detection here.
-
-
+                    update(false);
                     break;
-
                 case PlayerState.Jump:
-                    //gravity accel
-                    vel.Y += GRAVITY;
-
-                    //decide here if we want air control and how much
-                    if (G.input.Keyboard[Keys.A].IsDown)
-                    {
-                        facesRight = false;
-                        vel.X = -CHARSPEED;
-                    }
-                    else if (G.input.Keyboard[Keys.D].IsDown)
-                    {
-                        facesRight = true;
-                        vel.X = CHARSPEED;
-                    }
-                    else
-                    {
-                        vel.X *= AIRCOOLDOWN;
-                    }
-
-
-                    //update position
-                    this.pos += vel;
-
-                    //do collision detection here
-                    foreach (Rectangle r in G.level.rectangles)
-                    {
-                        intersect = Rectangle.Intersect(trans, r);
-                        if (!intersect.IsEmpty)
-                        {
-                            //find minor axis
-                            int y = intersect.Height;
-                            int x = intersect.Width;
-
-                            if (x < y)
-                            {
-                                //resolve in x axis
-                                if (r.X < trans.X)
-                                {
-                                    this.pos.X += x;
-                                }
-                                else
-                                {
-                                    this.pos.X -= x;
-                                }
-                            }
-                            else
-                            {
-                                //resolve in y axis
-                                if (r.Y < trans.Y)
-                                {
-                                    this.pos.Y += y;
-                                }
-                                else
-                                {
-                                    this.pos.Y -= y;
-                                }
-                                this.playerState = PlayerState.Run;
-                                this.vel.Y = 0f;
-                            }
-                            break;
-                        }
-                    }
-
+                    update(true);
                     break;
 
                 case PlayerState.Lunge:
@@ -231,6 +91,93 @@ namespace Halloween.Entities
                     break;
             }
 
+        }
+
+        public void update(bool inAir)
+        {
+            if (G.input.Keyboard[Keys.A].IsDown)
+            {
+                facesRight = false;
+                vel.X = -CHARSPEED;
+            }
+            else if (G.input.Keyboard[Keys.D].IsDown)
+            {
+                facesRight = true;
+                vel.X = CHARSPEED;
+            }
+            else
+            {
+                vel.X *= GROUNDCOOLDOWN;
+            }
+
+            if (G.input.Keyboard[Keys.Space].IsPressed && !inAir)
+            {
+                vel.Y = -JUMPSPEED;
+                this.playerState = PlayerState.Jump;
+            }
+            else
+            {
+                vel.Y += GRAVITY;
+            }
+
+            Vector2 newPos = this.pos + vel;
+
+
+            Rectangle intersect;
+            Rectangle trans = this.collisionBox;
+
+            trans.X += (int)newPos.X;
+            trans.Y += (int)newPos.Y;
+
+            bool hitY = false;
+            
+            foreach (Rectangle r in G.level.rectangles)
+            {
+                intersect = Rectangle.Intersect(trans, r);
+                if (!intersect.IsEmpty)
+                {
+                    //find minor axis
+                    int y = intersect.Height;
+                    int x = intersect.Width;
+
+                    if (x < y)
+                    {
+                        //resolve in x axis
+                        if (r.X < trans.X)
+                        {
+                            newPos.X += x;
+                        }
+                        else
+                        {
+                            newPos.X -= x;
+                        }
+                    }
+                    else
+                    {
+                        hitY = true;
+                        //resolve in y axis
+                        if (r.Y < trans.Y)
+                        {
+                            newPos.Y += y;
+                        }
+                        else
+                        {
+                            newPos.Y -= y;
+                        }
+                    }
+                }
+            }
+
+            if ((Math.Abs(this.pos.Y - newPos.Y) < 2f) && hitY)
+            {
+                this.playerState = PlayerState.Run;
+                this.vel.Y = 0f;
+            }
+            else
+            {
+                this.pos.Y = newPos.Y;
+            }
+            this.pos.X = newPos.X;
         }
 
         public void zombieUpdate(GameTime gameTime)
